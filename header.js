@@ -1,7 +1,37 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import './Login.css';
+import './popup.css';
+import Login from "./Login";
+
+
+class Popup extends React.Component {
+  render() {
+    return (
+      <div className='popup'>
+        <div className='popup_inner'>
+          <Login />
+		 
+        <button className='button' onClick={this.props.closePopup}>X</button>
+		
+        </div>
+      </div>
+    );
+  }
+}
 
 class Header extends React.Component {
+	constructor() {
+    super();
+    this.state = {
+      showPopup: false
+    };
+  }
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
      render() {
         return (
 		<div>
@@ -11,11 +41,10 @@ class Header extends React.Component {
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
       <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#link">Link</Nav.Link>
-      <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+      <Nav.Link href="#link">Scan</Nav.Link>
+      <NavDropdown title="MY ACCOUNT" id="basic-nav-dropdown">
+        <NavDropdown.Item onClick={this.togglePopup.bind(this)}>SIGN IN</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">SIGN UP</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
       </NavDropdown>
@@ -26,6 +55,12 @@ class Header extends React.Component {
     </Form>
   </Navbar.Collapse>
 </Navbar>
+{this.state.showPopup ? 
+          <Popup
+            closePopup={this.togglePopup.bind(this)}
+          />
+          : null
+        }
   </div>
         );
     }
