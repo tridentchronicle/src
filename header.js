@@ -3,9 +3,12 @@ import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-boots
 import './Login.css';
 import './popup.css';
 import Login from "./Login";
+import { Router, Route, Link, browserHistory } from 'react-router';
 
 
-class Popup extends React.Component {
+
+
+class Popup extends React.Component {
   render() {
     return (
       <div className='popup'>
@@ -40,8 +43,8 @@ class Header extends React.Component {
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#link">Scan</Nav.Link>
+      <Nav.Link href="/home">Home</Nav.Link>
+      <Nav.Link href="/scan">Scan</Nav.Link>
       <NavDropdown title="MY ACCOUNT" id="basic-nav-dropdown">
         <NavDropdown.Item onClick={this.togglePopup.bind(this)}>SIGN IN</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">SIGN UP</NavDropdown.Item>
