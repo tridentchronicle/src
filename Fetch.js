@@ -7,18 +7,22 @@ function Contact(props) {
   return (
     <div className="contact">
       <span>{props.name}</span>
+      <span>{props.timestamp}</span>
+      <span>{props.country}</span>
     </div>
   );
 }
 
 Contact.propTypes = {
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  timestamp: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired
 };
 
 
 function ContactList(props) {
   return (
-    <div>{props.contacts.map(c => <Contact key={c.id} name={c.name} />)}</div>
+    <div>{props.contacts.map(c => <Contact key={c.id} country={c.country} timestamp={c.timestamp} name={c.name} />)}</div>
   );
 }
 
@@ -36,13 +40,14 @@ class Fetch extends Component {
 
   componentDidMount() {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get("http://localhost:3000/api/org.example.empty.addDistributor")
       .then(response => {
         // create an array of contacts only with relevant data
         const newContacts = response.data.map(c => {
           return {
-            id: c.id,
-            name: c.name
+            country: c.country,
+            name: c.name,
+            timestamp: c.timestamp
           };
         });
 
@@ -63,7 +68,7 @@ class Fetch extends Component {
       <div className="App">
         <header className="App-header">
          
-          <h1 className="App-title">React Contact Manager</h1>
+          <h1 className="App-title">Fetching from rest server..</h1>
         </header>
 
         <ContactList contacts={this.state.contacts} />

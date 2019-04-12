@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import './index.css';
 import Fetch from './Fetch';
+import Post from './Post';
 import Header from './header';
 import Footer from './footer';
 import Home from './home';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import { Router, Route, Link, browserHistory, IndexRoute ,IndexRedirect } from 'react-router';
+import {Router, Route, Link, BrowserRouter} from 'react-router-dom';
 import QrReader from 'react-qr-reader'
 
 
@@ -46,17 +47,17 @@ class Interface extends React.Component {
     render() { 
         return(
             <div> <Header />
-        <div><Fetch />   
+        <div><Post />   
+        <div><Fetch /></div>
 
     <div>
-    
-     <Router history = {browserHistory}>
-     
-     <Route path="/" component={Home} />
+    <BrowserRouter> 
+     <Route path="/" exact component={Home} />
          <Route path = "/scan" component = {Scan} />
          <Route path = "/home" component = {Home} />
         
-   </Router>
+
+   </BrowserRouter>
     
 <div> <Footer />
 </div>
