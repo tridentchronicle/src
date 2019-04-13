@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Fetch from './Fetch';
 import Post from './Post';
 import Header from './header';
+import Login from './Login';
 import Footer from './footer';
 import Home from './home';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -55,6 +56,7 @@ class Interface extends React.Component {
      <Route path="/" exact component={Home} />
          <Route path = "/scan" component = {Scan} />
          <Route path = "/home" component = {Home} />
+         <Route path = "/account" component = {Login} />
         
 
    </BrowserRouter>
