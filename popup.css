@@ -22,17 +22,19 @@ html, body, .app {
 }
 .popup_inner {
   position: absolute;
-  left: 25%;
-  right: 25%;
-  top: 25%;
-  bottom: 25%;
+width:100%;
+top:13%;
+	bottom: 0;
+	left: 20%;
+	right: 0;
   margin: auto;
-  background: white;
+  
 }
  .button {
 	   background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
+ color: #808080;
     cursor:pointer;
     overflow: hidden;
     outline:none;
@@ -40,9 +42,11 @@ html, body, .app {
      width: 18px;
      font-size: 8pt;
      font-family: tahoma;
+     
      margin-top: 1px;
      margin-right: 2px;
      position:absolute;
      top:0;
-     right:0;
+     right:51%;
  }
+

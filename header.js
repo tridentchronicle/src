@@ -1,19 +1,22 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import './Login.css';
+import './header.css';
 import './popup.css';
-import Login from "./Login";
-import { Router, Route, Link, browserHistory } from 'react-router';
+import Login2 from "./Login2";
+import { Router, Route, Link} from 'react-router-dom';
 
-
+const navbar = {backgroundColor: '#E1C683'};
 
 
 class Popup extends React.Component {
   render() {
     return (
+     
       <div className='popup'>
         <div className='popup_inner'>
-          <Login />
+      
+          SOMETHING
 		 
         <button className='button' onClick={this.props.closePopup}>X</button>
 		
@@ -38,14 +41,15 @@ class Header extends React.Component {
      render() {
         return (
 		<div>
-           <Navbar bg="light" expand="lg">
+           <Navbar sticky="top"  expand="lg">
   <Navbar.Brand href="#home">PRODUCT_NAME</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
       <Nav.Link href="/home">Home</Nav.Link>
       <Nav.Link href="/scan">Scan</Nav.Link>
-      <NavDropdown title="MY ACCOUNT" id="basic-nav-dropdown">
+      <Nav.Link href="/account">My Account</Nav.Link>
+      <NavDropdown title="Something" id="basic-nav-dropdown">
         <NavDropdown.Item onClick={this.togglePopup.bind(this)}>SIGN IN</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">SIGN UP</NavDropdown.Item>
         <NavDropdown.Divider />
