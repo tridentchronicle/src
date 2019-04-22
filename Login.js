@@ -12,8 +12,8 @@
       constructor(){
         super();
         this.state = {
-        username: '',
-        password: '',
+        name: '',
+        country: '',
         redirectToReferrer: false
         };
         this.login = this.login.bind(this);
@@ -22,12 +22,12 @@
         
         
         login() {
-        if(this.state.username && this.state.password){
+        if(this.state.name && this.state.country){
         GetLoginData().then((result) => {
         let responseJson = result;
         var n = responseJson.length;
         for (var i = 0; i < n; i++) {
-        if(this.state.username==responseJson[i].username && this.state.password==responseJson[i].password ){
+        if(this.state.name==responseJson[i].name && this.state.country==responseJson[i].country ){
         this.setState({redirectToReferrer: true});
         break;
         }
@@ -57,9 +57,9 @@
         <div className="medium-5 columns left">
         <h4>Login</h4>
         <label>Username</label>
-        <input type="text" name="username" onChange={this.onChange}/>
+        <input type="text" name="name" onChange={this.onChange}/>
         <label>Password</label>
-        <input type="password" name="password" onChange={this.onChange}/>
+        <input type="password" name="country" onChange={this.onChange}/>
         <input type="submit" value="Login" onClick={this.login}/>
         <a href="/signup">Registration</a>
         </div>
@@ -67,4 +67,7 @@
         );
         }
         }
+
+
+        
        

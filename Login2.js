@@ -3,15 +3,24 @@ import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, M
 import './login2.css';
 import {Redirect,BrowserRouter} from 'react-router-dom';
 import GetLoginData from './GetLoginData'
+import addWhey from './addWhey';
+import BackgroundHeader from "./bgr.jpg";
 
+const BackgroundHead = {
+  backgroundImage: 'url('+ BackgroundHeader+')',
+  width: '100%',
+  height: '600px',
+  backgroundSize: 'cover'
+  }
+ 
 
 
 export default class Login2 extends React.Component {
 	constructor(){
         super();
         this.state = {
-        name: '',
-        country: '',
+        email: '',
+        password: '',
         redirectToReferrer: false
         };
         this.login = this.login.bind(this);
@@ -25,12 +34,12 @@ export default class Login2 extends React.Component {
         
         
         login() {
-        if(this.state.name && this.state.country){
+        if(this.state.email && this.state.password){
         GetLoginData().then((result) => {
         let responseJson = result;
         var n = responseJson.length;
         for (var i = 0; i < n; i++) {
-        if(this.state.name==responseJson[i].name && this.state.country==responseJson[i].country ){
+        if(this.state.email==responseJson[i].email && this.state.password==responseJson[i].password ){
         this.setState({redirectToReferrer: true});
         break;
         }
@@ -52,11 +61,12 @@ export default class Login2 extends React.Component {
         if (this.state.redirectToReferrer ){
         return (
 		
-		<Redirect to={'/home'}/>
+		<Redirect to={'/addWhey'}/>
 		)
 		}
 		
   return (
+    <div style={BackgroundHead}>
     <div className='popup'>
         <div className='popup_inner'>
 
@@ -75,14 +85,14 @@ export default class Login2 extends React.Component {
                 validate
                 error="wrong"
 				success="right"
-				name="name" onChange={this.onChange}
+				name="email" onChange={this.onChange}
               />
               <MDBInput
                 label="Your password"
                 type="password"
                 validate
 				containerClass="mb-0"
-				name="country" onChange={this.onChange}
+				name="password" onChange={this.onChange}
               />
               <p className="font-small blue-text d-flex justify-content-end pb-3">
                 Forgot
@@ -147,7 +157,7 @@ export default class Login2 extends React.Component {
       </MDBRow>
     </MDBContainer>
     </div>
-      </div>
+    </div></div>
   );
 }
 }

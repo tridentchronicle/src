@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 
-class Post extends React.Component {
+class transfertoretailer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: ' ',
-            country: ' '
+            assetkey: '',
+            retailerid: ''
         };
     }
     
@@ -17,16 +17,18 @@ class Post extends React.Component {
     }
     
     onSubmit = (e) => {
+        
        e.preventDefault();
        const form = {
-        name: this.state.name,
-        country: this.state.country
+        assetkey: this.state.assetkey,
+        retailerid: this.state.retailerid
+
        }
          {/* Send data to API*/}
          var authOptions = {
           method: 'post',
-          url: 'http://localhost:3000/api/org.authentication.whey.addDistributor',
-          data: JSON.stringify({"name": this.state.name,"country": this.state.country}),
+          url: 'http://localhost:3000/api/org.authentication.whey.transfertoretailer',
+          data: JSON.stringify({"whey": "resource:org.authentication.whey.WheyProtein#"+this.state.assetkey,"retailer": "resource:org.authentication.whey.Retailer#"+this.state.retailerid}),
           headers: {
             'Content-Type': 'application/json'
            },
@@ -47,25 +49,25 @@ class Post extends React.Component {
             <div>
             <form>
                 <label>
-                    Name:
+                    Whey id:
                     <input
-                        name='name'
-                        value={this.state.name}
+                        name='assetkey'
+                        value={this.state.assetkey}
                         onChange={e => this.handleChange(e)}/>
                 </label>
                 <label>
-                    Country:
+                    Retailer id:
                     <input 
-                        name='country'
-                        value={this.state.country} 
+                        name='retailerid'
+                        value={this.state.retailerid} 
                         onChange={e => this.handleChange(e)}/>
                 </label>
-                <button onClick={(e) => this.onSubmit(e)}>POST</button>         
+                <button onClick={(e) => this.onSubmit(e)}>TRANSFER</button>         
             </form>
             </div>
         );
     }
     }
 
-   export default Post;
+   export default transfertoretailer;
   

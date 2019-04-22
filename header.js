@@ -42,7 +42,7 @@ class Header extends React.Component {
         return (
 		<div>
            <Navbar sticky="top"  expand="lg">
-  <Navbar.Brand href="#home">PRODUCT_NAME</Navbar.Brand>
+  <Navbar.Brand href="#home">X-Tags</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">

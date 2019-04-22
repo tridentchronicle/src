@@ -40,7 +40,7 @@ class Fetch extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:3000/api/org.example.empty.addDistributor")
+      .get("http://localhost:3000/api/org.authentication.whey.addDistributor")
       .then(response => {
         // create an array of contacts only with relevant data
         const newContacts = response.data.map(c => {
