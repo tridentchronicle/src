@@ -45,7 +45,7 @@ onSubmit = (e) => {
      var authOptions = {
       method: 'post',
       url: 'http://localhost:3000/api/org.authentication.whey.sellWhey',
-      data: JSON.stringify({"whey": "resource:org.authentication.whey.WheyProtein#"+this.state.result, "RetailerId": "resource:org.authentication.whey.Retailer#"+this.state.id}),
+      data: JSON.stringify({"whey": "resource:org.authentication.whey.WheyProtein#"+this.state.result, "RetailerId": "resource:org.authentication.whey.Retailer#"+this.props.location.state.id}),
       headers: {
         'Content-Type': 'application/json'
        },

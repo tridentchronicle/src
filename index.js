@@ -13,6 +13,9 @@ import addDistributor from './addDistributor';
 import addRetailer from './addRetailer';
 import transfertoretailer from './transfertoretailer';
 import transfertodistributor from './transfertodistributor';
+import ManfWelcome from './ManfWelcome';
+import DistWelcome from './DistWelcome';
+import RetWelcome from './RetWelcome';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -64,6 +67,9 @@ class Interface extends React.Component {
          <Route path = "/scan" component = {Scan} />
          <Route path = "/home" component = {Home} />
          <Route path = "/account" component = {Login2} />
+         <Route path = "/ManfWelcome" component = {ManfWelcome} />
+         <Route path = "/DistWelcome" component = {DistWelcome} />
+         <Route path = "/RetWelcome" component = {RetWelcome} />
          <Route path = "/addWhey" component = {addWhey} />
          <Route path = "/transfer1" component = {transfertodistributor} />
          <Route path = "/transfer2" component = {transfertoretailer} />

@@ -4,7 +4,10 @@ import './login2.css';
 import {Redirect,BrowserRouter} from 'react-router-dom';
 import GetLoginData from './GetLoginData'
 import addWhey from './addWhey';
+import home from './home';
 import BackgroundHeader from "./bgr.jpg";
+import { Form,Col,Button } from 'react-bootstrap';
+
 
 const BackgroundHead = {
   backgroundImage: 'url('+ BackgroundHeader+')',
@@ -19,35 +22,66 @@ export default class Login2 extends React.Component {
 	constructor(){
         super();
         this.state = {
+          id: '',
+          type: 'select',
         email: '',
         password: '',
         redirectToReferrer: false
         };
         this.login = this.login.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.handleChange3  = this.handleChange3 .bind(this);
         }
 
         handleClose = () => {
           <Redirect to={'/home'}/>
         }
+
       
         
         
         login() {
+        
+          if(this.state.type=="select")
+          {
+            window.confirm("Please select login type"); 
+          }else{
         if(this.state.email && this.state.password){
-        GetLoginData().then((result) => {
+        GetLoginData(this.state.type).then((result) => {
         let responseJson = result;
+        
         var n = responseJson.length;
         for (var i = 0; i < n; i++) {
         if(this.state.email==responseJson[i].email && this.state.password==responseJson[i].password ){
-        this.setState({redirectToReferrer: true});
-        break;
+         
+          
+          if(this.state.type=="Manufacturer"){
+            this.state.id=responseJson[i].manufacturerId;
         }
+
+        if(this.state.type=="Distributor"){
+           this.state.id=responseJson[i].distributorId; 
+      }
+
+      if(this.state.type=="Retailer"){
+         this.state.id=responseJson[i].retailerId;    
+    }
+        this.setState({redirectToReferrer: true});
+             break;
+        }
+        
        
       }
+      if (this.state.redirectToReferrer ){
+        
+    }
+       else{
+        window.confirm("INVALID CREDENTIALS"); 
+      }
+      
         });
         
-      }
+      }}
         }
         
         
@@ -55,15 +89,50 @@ export default class Login2 extends React.Component {
         this.setState({[e.target.name]:e.target.value});
         }
 
-        render() {
+        handleChange3 = (e) => {
+          this.setState({
+              type: e.target.value,
+          })
+      }
+
+        render() {  
+         
+          if (this.state.redirectToReferrer ){
+          
+
+            if(this.state.type=="Manufacturer"){
+            return (
         
-        
-        if (this.state.redirectToReferrer ){
+       
+        <Redirect to={{
+          pathname: '/ManfWelcome',
+          state: { uid: this.state.id, ref:this.state.email }
+      }} />
+
+        )
+        }
+
+        if(this.state.type=="Distributor"){
+          return (
+      
+            <Redirect to={{
+              pathname: '/DistWelcome',
+              state: { uid: this.state.id, ref:this.state.email }
+          }} />
+
+      )
+      }
+
+      if(this.state.type=="Retailer"){
         return (
-		
-		<Redirect to={'/addWhey'}/>
-		)
-		}
+    
+    <Redirect to={{
+          pathname: '/RetWelcome',
+          state: { uid: this.state.id, ref:this.state.email }
+      }} />
+    )
+    }
+      }
 		
   return (
     <div style={BackgroundHead}>
@@ -80,6 +149,17 @@ export default class Login2 extends React.Component {
                   <strong>Sign in</strong>
                 </h3>
               </div>
+
+              <Form.Group controlId="type">
+    <Form.Control as="select"  id="lang" onChange={this.handleChange3.bind(this)} value={this.state.type}>
+  
+          <option value="select">Select the login type</option>
+          <option value="Manufacturer">Manufacturer Login</option>
+          <option value="Distributor">Distributor Login</option>
+          <option value="Retailer">Retailer Login</option>
+      
+        </Form.Control>
+        </Form.Group>
               <MDBInput
                 label="Your email"
                 validate
@@ -94,13 +174,7 @@ export default class Login2 extends React.Component {
 				containerClass="mb-0"
 				name="password" onChange={this.onChange}
               />
-              <p className="font-small blue-text d-flex justify-content-end pb-3">
-                Forgot
-                <a href="#!" className="blue-text ml-1">
-
-                  Password?
-                </a>
-              </p>
+             
               <div className="text-center mb-3">
                 <MDBBtn
                   type="button"
@@ -144,6 +218,13 @@ export default class Login2 extends React.Component {
               </div>
             </MDBCardBody>
             <MDBModalFooter className="mx-5 pt-3 mb-1">
+            <p className="font-small grey-text d-flex justify-content-end">
+                
+                <a href="#!" className="blue-text ml-1">
+
+                Forgot Password?
+                </a>
+              </p>
               <p className="font-small grey-text d-flex justify-content-end">
                 Not a member?
                 <a href="#!" className="blue-text ml-1">

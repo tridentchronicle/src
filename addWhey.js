@@ -46,7 +46,7 @@ class addWhey extends React.Component {
          var authOptions = {
           method: 'post',
           url: 'http://localhost:3000/api/org.authentication.whey.addwhey',
-          data: JSON.stringify({"manufacturerid": "arbitrary","type": this.state.type,"flavour": this.state.flavour,"size": this.state.size}),
+          data: JSON.stringify({"manufacturerid": this.props.location.state.id,"type": this.state.type,"flavour": this.state.flavour,"size": this.state.size}),
           headers: {
             'Content-Type': 'application/json'
            },
@@ -65,6 +65,7 @@ class addWhey extends React.Component {
 
 
   render() {
+    
     return (
 <div>
 <Form>
