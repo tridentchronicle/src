@@ -16,6 +16,7 @@ import transfertodistributor from './transfertodistributor';
 import ManfWelcome from './ManfWelcome';
 import DistWelcome from './DistWelcome';
 import RetWelcome from './RetWelcome';
+import Scanner from './Scanner';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -23,35 +24,7 @@ import {Router, Route, Link, BrowserRouter} from 'react-router-dom';
 import QrReader from 'react-qr-reader';
 const divcolor = {backgroundColor: '#E1C683'};
 
-class Scan extends React.Component {
-  state = {
-    result: 'No result'
-  }
 
-  handleScan = data => {
-    if (data) {
-      this.setState({
-        result: data
-      })
-    }
-  }
-  handleError = err => {
-    console.error(err)
-  }
-  render() {
-    return (
-      <div>
-        <QrReader
-          delay={300}
-          onError={this.handleError}
-          onScan={this.handleScan}
-          style={{ width: '40%' }}
-        />
-        <p>{this.state.result}</p>
-      </div>
-    )
-  }
-}
 
 class Interface extends React.Component {
     render() { 
@@ -64,7 +37,7 @@ class Interface extends React.Component {
 <div>
     <BrowserRouter> 
      <Route path="/" exact component={Home} />
-         <Route path = "/scan" component = {Scan} />
+         <Route path = "/scan" component = {Scanner} />
          <Route path = "/home" component = {Home} />
          <Route path = "/account" component = {Login2} />
          <Route path = "/ManfWelcome" component = {ManfWelcome} />
