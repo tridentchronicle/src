@@ -47,6 +47,7 @@ class ManfWelcome extends React.Component {
 
 
   render() {
+    
     if(this.state.a){
         return (
         <Redirect to={{
@@ -103,6 +104,20 @@ class ManfWelcome extends React.Component {
       }
     return (
       <div >
+          hi
+          <br></br>
+          hi
+          <br></br>
+          hi
+          <br></br>
+          hi
+          <br></br>
+          hi
+          <br></br>
+          hi
+          <br></br>
+          hi
+          <br></br>
           {this.state.counter}
 	 <input type="submit" value="ADD WHEY" onClick={this.addwhey}/>
      <input type="submit" value="TRANSFER TO DISTRIBUTOR" onClick={this.transfertodist}/>

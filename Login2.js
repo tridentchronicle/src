@@ -1,21 +1,12 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 import './login2.css';
+import './popup.css';
 import {Redirect,BrowserRouter} from 'react-router-dom';
 import GetLoginData from './GetLoginData'
 import addWhey from './addWhey';
-import home from './home';
-import BackgroundHeader from "./bgr.jpg";
+import Home from './home';
 import { Form,Col,Button } from 'react-bootstrap';
-
-
-const BackgroundHead = {
-  backgroundImage: 'url('+ BackgroundHeader+')',
-  width: '100%',
-  height: '600px',
-  backgroundSize: 'cover'
-  }
- 
 
 
 export default class Login2 extends React.Component {
@@ -135,7 +126,8 @@ export default class Login2 extends React.Component {
       }
 		
   return (
-    <div style={BackgroundHead}>
+    <div>
+      <Home/>
     <div className='popup'>
         <div className='popup_inner'>
 

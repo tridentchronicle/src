@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import './index.css';
-import Fetch from './Fetch';
-import Post from './Post';
 import Header from './header';
 import Login2 from './Login2';
 import Footer from './footer';
@@ -17,12 +15,13 @@ import ManfWelcome from './ManfWelcome';
 import DistWelcome from './DistWelcome';
 import RetWelcome from './RetWelcome';
 import Scanner from './Scanner';
+import Fourth from './fourth';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import {Router, Route, Link, BrowserRouter} from 'react-router-dom';
 import QrReader from 'react-qr-reader';
-const divcolor = {backgroundColor: '#E1C683'};
+const divcolor = {backgroundColor: '#49A330'};
 
 
 
@@ -51,8 +50,20 @@ class Interface extends React.Component {
          <Route path = "/sellWhey" component = {sellWhey} />
         </BrowserRouter>
    </div>
-   <div>Another div </div>
-   <div style={divcolor}>Another div </div>
+   <div>
+<Fourth />
+</div>
+
+   <div>
+   
+       The entry of a new product in the market gives rise to two consequences – patronage from customers and the development of their counterfeit counterparts. 
+
+As the patronage from customers increases, the chances of counterfeit products seeping into the market increases simultaneously and because of this, both end users and the company involved suffer from the out-turns. 
+
+After the rise of e-commerce platforms, infiltrating counterfeit products has become far simpler, leading the manufacturer to face a domino effect of ramifications in the market. Of all the industries, it is the medical industry, especially the Supplement sector, that suffers most from devastating impacts of counterfeit products.
+<br></br>
+<br></br> <br></br> <br></br> <br></br>
+ </div>
 <div>
 <Footer />
 </div>

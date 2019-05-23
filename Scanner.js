@@ -1,22 +1,25 @@
 import React from 'react';
+import './Scanner.css';
 import QrReader from 'react-qr-reader';
 import GetLoginData from './GetLoginData'
+import Login2 from './Login2';
 
 class Scanner extends React.Component {
   state = {
     result2: 'No_result',
     type:'WheyProtein',
     owner:'nil',
-    manufacturer:'',
-    distributor:'',
-    distributor2:'',
-    retailer:'',
-    seller:'',
-    seller2:'',
-    category:'',
-    flavour:'',
-    size:'',
-    dateofcreation:''
+    manufacturer:'nil',
+    distributor:'nil',
+    distributor2:'nil',
+    retailer:'nil',
+    seller:'nil',
+    seller2:'nil',
+    category:'nil',
+    flavour:'nil',
+    size:'nil',
+    dateofcreation:'nil',
+    counter: 0
   }
 
   handleScan = data => {
@@ -40,39 +43,55 @@ class Scanner extends React.Component {
             this.state.flavour=responseJson[i].Flavour;
             this.state.size=responseJson[i].Size;
             this.state.dateofcreation=responseJson[i].timeoftransaction;
+            this.state.counter++;
+            break;
 
         }
+      
     }
+    
         });
     
 
        
 }}
 
+
   handleError = err => {
     console.error(err)
   }
+
   render() {
+  
     return (
-      <div>
+      <div class="auth">
+      <div class="img-container8">
+
         <QrReader
           delay={300}
           onError={this.handleError}
           onScan={this.handleScan}
-          style={{ width: '40%' }}
+          style={{ width: '50%' }}
         />
         <p>{this.state.result2}</p>
+        
+        </div>
+
        
-        <p>DATE OF CREATION : {this.state.dateofcreation}</p>
-        <p>TYPE : {this.state.category}</p>
-        <p>FLAVOUR : {this.state.flavour}</p>
-        <p>SIZE : {this.state.size}</p>
-        <p>LAST KNOWN OWNER : {this.state.owner}</p>
-        <p>MANUFACTURER : {this.state.manufacturer}</p>
-        <p>DISTRIBUTOR DETAILS : {this.state.distributor}</p>
-        <p>DATE OF TRANSFER TO DISTRIBUTOR : {this.state.distributor2}</p>
-        <p>SELLER DETAILS : {this.state.seller}</p>
-        <p>TIME AT WHICH PRODUCT WAS SOLD : {this.state.seller2}</p>
+        <div class="img-container8"><p>
+          <h3><b>SCAN RESULTS</b></h3> <br></br>
+          Date of creation : {this.state.dateofcreation}
+      <br></br>Type : {this.state.category}
+      <br></br>Flavour : {this.state.flavour}
+      <br></br>Size : {this.state.size}
+      <br></br>Last known owner : {this.state.owner}
+      <br></br>Manufacturer : {this.state.manufacturer}
+      <br></br>Distributor : {this.state.distributor}
+      <br></br>Date of transfer to distributor : {this.state.distributor2}
+      <br></br>SELLER DETAILS : {this.state.seller}
+      <br></br>Time at which product was sold : {this.state.seller2}</p>
+      </div>
+     
       </div>
     );
   }

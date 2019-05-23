@@ -1,5 +1,5 @@
 export default function GetLoginData(type) {
- let BaseURL = 'http://localhost:3000/api/org.authentication.whey.'+type;
+ let BaseURL = 'http://35.229.19.138:3000/api/org.authentication.whey.'+type;
  //let BaseURL = 'http://localhost/PHP-Slim-Restful/api/';
  return new Promise((resolve, reject) =>{
  fetch(BaseURL, {
