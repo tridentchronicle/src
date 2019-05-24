@@ -1,6 +1,7 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput } from 'mdbreact';
 import axios from 'axios';
+import './addRetailer.css';
 
 
 class addRetailer extends React.Component {
@@ -49,6 +50,7 @@ class addRetailer extends React.Component {
     }
     render() {
   return (
+    <div class="main4">
     <MDBContainer>
       <MDBRow>
         <MDBCol md="6">
@@ -111,6 +113,7 @@ class addRetailer extends React.Component {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+    </div>
   );
 }}
 

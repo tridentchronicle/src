@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import './index.css';
+import App from './app';
 import Header from './header';
 import Login2 from './Login2';
 import Footer from './footer';
@@ -16,6 +17,7 @@ import DistWelcome from './DistWelcome';
 import RetWelcome from './RetWelcome';
 import Scanner from './Scanner';
 import Fourth from './fourth';
+import Dashboard from './dashboard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -29,12 +31,7 @@ class Interface extends React.Component {
     render() { 
         return(
          <div>
-            <div>
- <Header /> </div>
-
-   
-<div>
-    <BrowserRouter> 
+                 <BrowserRouter> 
      <Route path="/" exact component={Home} />
          <Route path = "/scan" component = {Scanner} />
          <Route path = "/home" component = {Home} />
@@ -48,25 +45,12 @@ class Interface extends React.Component {
          <Route path = "/addDistributor" component = {addDistributor} />
          <Route path = "/addRetailer" component = {addRetailer} />
          <Route path = "/sellWhey" component = {sellWhey} />
+         <Route path = "/dashboard" component = {Dashboard} />
+
+
         </BrowserRouter>
-   </div>
-   <div>
-<Fourth />
-</div>
+          
 
-   <div>
-   
-       The entry of a new product in the market gives rise to two consequences – patronage from customers and the development of their counterfeit counterparts. 
-
-As the patronage from customers increases, the chances of counterfeit products seeping into the market increases simultaneously and because of this, both end users and the company involved suffer from the out-turns. 
-
-After the rise of e-commerce platforms, infiltrating counterfeit products has become far simpler, leading the manufacturer to face a domino effect of ramifications in the market. Of all the industries, it is the medical industry, especially the Supplement sector, that suffers most from devastating impacts of counterfeit products.
-<br></br>
-<br></br> <br></br> <br></br> <br></br>
- </div>
-<div>
-<Footer />
-</div>
    </div> 
    
        

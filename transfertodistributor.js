@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './transfertodistributor.css';
 
 class transfertodistributor extends React.Component {
     constructor(props) {
@@ -45,7 +46,7 @@ class transfertodistributor extends React.Component {
     
     render() {
         return (
-            <div>
+            <div class="main5">
             <form>
                 <label>
                     Whey id:

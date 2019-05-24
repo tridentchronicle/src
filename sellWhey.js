@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import QrReader from 'react-qr-reader';
+import './sellWhey.css';
 
 export default class sellWhey extends React.Component{
   constructor(props) {
@@ -64,7 +65,7 @@ onSubmit = (e) => {
 
   render() {
     return (
-      <div>
+      <div class="main7">
         <QrReader
           delay={300}
           onError={this.handleError}

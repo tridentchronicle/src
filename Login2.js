@@ -96,7 +96,7 @@ export default class Login2 extends React.Component {
         
        
         <Redirect to={{
-          pathname: '/ManfWelcome',
+          pathname: '/dashboard',
           state: { uid: this.state.id, ref:this.state.email }
       }} />
 

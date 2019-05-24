@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './addWhey.css';
 import { Form,Col,Button } from 'react-bootstrap';
 
 class addWhey extends React.Component {
@@ -67,7 +68,7 @@ class addWhey extends React.Component {
   render() {
    
     return (
-<div>
+<div class="main2">
 <Form>
   
   <Form.Group controlId="type">
