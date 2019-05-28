@@ -5,9 +5,13 @@ import TransferD from './transfertodistributor';
 import TransferR from './transfertoretailer';
 import AddDistributor from './addDistributor';
 import AddRetailer from './addRetailer';
-import Header2 from './header';
+import Header2 from './header2';
 import Footer from './footer';
 import Fourth from './fourth';
+import Inventory from './inventory';
+import Fetch from './Fetch';
+import Distributors from './Distributors';
+import Retailers from './Retailers';
 
 import './dashboard.css';
 import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
@@ -48,21 +52,38 @@ class MainPageComponent extends React.Component {
 class SideNavComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { activeItem: "home" };
+    this.state = { activeItem: "home",
+    TextBoxValue: []
+  };
     this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   handleItemClick(e, { name }) {
     this.setState({ activeItem: name });
   }
+  SubmitValue = (e) => {
+    this.props.handleData(this.state.TextBoxValue)
+ }
+   
+
+       onChange=(e)=>{
+    this.setState({TextBoxValue: e.target.value})
+       } 
+
 
   render() {
     const { activeItem } = this.state;
-
+    this.state.TextBoxValue[0]=this.props.location.state.ref;
+    this.state.TextBoxValue[1]=this.props.location.state.utype;
+    console.log("try"+this.state.TextBoxValue[0]+this.state.TextBoxValue[1])
     return (
       <div>
         <Header2 />
       <div>
+      {(() => {
+        if(this.props.location.state.utype=="Manufacturer")
+        {
+          return(
         <Menu vertical id="side-menu">
           <Menu.Item
             name="Home"
@@ -104,18 +125,99 @@ class SideNavComponent extends React.Component {
             active={activeItem === "sell"}
             onClick={this.handleItemClick}
           />
-        </Menu>
+           <Menu.Item
+            name="Whey Protein Inventory"
+            active={activeItem === "sell"}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="Distributors"
+            active={activeItem === "sell"}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="Retailers"
+            active={activeItem === "sell"}
+            onClick={this.handleItemClick}
+          />
+        </Menu>)
+      }
+      else if(this.props.location.state.utype=="Distributor")
+        {
+          return(
+        <Menu vertical id="side-menu">
+          <Menu.Item
+            name="Home"
+            active={activeItem === "home"}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="Profile"
+            active={activeItem === "profile"}
+            onClick={this.handleItemClick}
+          />
+
+          <Menu.Item
+            name="Transfer to retailer"
+            active={activeItem === "transferr"}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="Sell Whey Protein"
+            active={activeItem === "sell"}
+            onClick={this.handleItemClick}
+          />
+           <Menu.Item
+            name="Whey Protein Inventory"
+            active={activeItem === "sell"}
+            onClick={this.handleItemClick}
+          />
+           <Menu.Item
+            name="Retailers"
+            active={activeItem === "sell"}
+            onClick={this.handleItemClick}
+          />
+        </Menu>)
+      }
+      else if(this.props.location.state.utype=="Retailer")
+      {
+        return(
+      <Menu vertical id="side-menu">
+        <Menu.Item
+          name="Home"
+          active={activeItem === "home"}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item
+          name="Profile"
+          active={activeItem === "profile"}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item
+          name="Sell Whey Protein"
+          active={activeItem === "sell"}
+          onClick={this.handleItemClick}
+        />
+         <Menu.Item
+           name="Whey Protein Inventory"
+          active={activeItem === "sell"}
+          onClick={this.handleItemClick}
+        />
+      </Menu>)
+    }
+
+        })()}
         {(() => {
              if(this.state.activeItem=="Add Whey Protein")
              { 
                 return (
-                <AddWhey /> )
+                <AddWhey TextBoxValue={this.state.TextBoxValue}/> )
              }
              else if(this.state.activeItem=="Add Distributor"){
               return( <AddDistributor />)
              }
              else if(this.state.activeItem=="Sell Whey Protein"){
-                return( <SellWhey />)
+                return( <SellWhey TextBoxValue={this.state.TextBoxValue} />)
                }
                else if(this.state.activeItem=="Transfer to retailer"){
                 return( <TransferR />)
@@ -126,8 +228,15 @@ class SideNavComponent extends React.Component {
                else if(this.state.activeItem=="Add Retailer"){
                 return( <AddRetailer />)
                }
-               else if(this.state.activeItem=="Home"){
-                return( <MainPageComponent />)
+               else if(this.state.activeItem=="Distributors"){
+                return( <Distributors />)
+               }
+               else if(this.state.activeItem=="Retailers"){
+                return( <Retailers />)
+               }
+               
+               else if(this.state.activeItem=="Whey Protein Inventory"){
+                return(  <Inventory TextBoxValue={this.state.TextBoxValue}/>)
                }
                else{
                 return( <MainPageComponent />)
@@ -135,8 +244,8 @@ class SideNavComponent extends React.Component {
 
 
       })()}
-      
-    
+       
+   
         
       </div>
        <Fourth />

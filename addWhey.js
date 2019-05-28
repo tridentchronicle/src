@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './addWhey.css';
-import { Form,Col,Button } from 'react-bootstrap';
+import { Form,Col,Row,Button } from 'react-bootstrap';
 
 class addWhey extends React.Component {
     constructor(props) {
@@ -9,7 +9,8 @@ class addWhey extends React.Component {
         this.state = {
           type: 'select',
           flavour: 'select',
-          size: 'select'
+          size: 'select',
+          number:''
         };
     }
     
@@ -28,6 +29,13 @@ class addWhey extends React.Component {
         size: e.target.value,
     })
 }
+
+handleChange4 = (e) => {
+  this.setState({
+      number: e.target.value,
+  })
+}
+
     onSubmit = (e) => {
       if(this.state.type=="select" || this.state.flavour=="select" || this.state.size=="select")
       {
@@ -46,13 +54,15 @@ class addWhey extends React.Component {
          {/* Send data to API*/}
          var authOptions = {
           method: 'post',
-          url: 'http://localhost:3000/api/org.authentication.whey.addwhey',
-          data: JSON.stringify({"manufacturerid": this.props.location.state.id,"type": this.state.type,"flavour": this.state.flavour,"size": this.state.size}),
+          url: 'http://35.229.19.138:3000/api/org.authentication.whey.addwhey',
+          data: JSON.stringify({"email": this.props.TextBoxValue[0],"type": this.state.type,"flavour": this.state.flavour,"size": this.state.size}),
           headers: {
             'Content-Type': 'application/json'
            },
           json: true
          };
+         for(var i=0;i<this.state.number;i++)
+         {
       axios(authOptions)
          .then((response) => {
              console.log(response);
@@ -60,16 +70,25 @@ class addWhey extends React.Component {
          .catch((error) => {
             alert(error)
            })
-          }
+          }}
     }
 
 
 
   render() {
-   
+   console.log(this.props.TextBoxValue[0])
     return (
 <div class="main2">
+<p className="h5 text-center mb-4">ADD WHEY PROTEIN</p>
 <Form>
+<Form.Group  controlId="fd">
+    <Form.Label >
+      Quantity:
+    </Form.Label>
+    
+      <Form.Control type="text" placeholder="Specify number of whey protein(s) to be added"  onChange={this.handleChange4.bind(this)} value={this.state.number} />
+    
+  </Form.Group>
   
   <Form.Group controlId="type">
 
@@ -109,10 +128,11 @@ class addWhey extends React.Component {
       
         </Form.Control>
         </Form.Group>
-      
-        <Button variant="primary"  onClick={(e) => this.onSubmit(e)}>
-          Submit
+      <div className="text-center">
+        <Button variant="outline-success" size="lg"   onClick={(e) => this.onSubmit(e)}>
+          ADD
         </Button>
+        </div>
         </Form>
        </div>
     );

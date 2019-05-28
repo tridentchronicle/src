@@ -1,11 +1,17 @@
 .img-container8 {
     float: left;
-    width: 50%;
-    margin-bottom: 145px;
+    width: 40%;
+    
+  }
+  .img-container18 {
+    float: left;
+    width: 60%;
+    
   }
   
   .auth{
     margin-top: 160px;
     margin-right: 10px;
     margin-left: 150px;
+    padding-bottom: 455px;
   }

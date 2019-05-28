@@ -1,6 +1,7 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput } from 'mdbreact';
 import axios from 'axios';
+import Dashboard from './dashboard';
 import './addDistributor.css';
 
 
@@ -10,7 +11,6 @@ class addDistributor extends React.Component {
         this.state = {
             name: '',
             email:'',
-            password:'',
             country: ''
         };
     }
@@ -26,14 +26,13 @@ class addDistributor extends React.Component {
        const form = {
         name: this.state.name,
         email: this.state.email,
-        password: this.state.password,
         country: this.state.country
        }
          {/* Send data to API*/}
          var authOptions = {
           method: 'post',
-          url: 'http://localhost:3000/api/org.authentication.whey.addDistributor',
-          data: JSON.stringify({"name": this.state.name,"email": this.state.email,"password": this.state.password,"country": this.state.country}),
+          url: 'http://35.229.19.138:3000/api/org.authentication.whey.addDistributor',
+          data: JSON.stringify({"name": this.state.name,"email": this.state.email,"country": this.state.country}),
           headers: {
             'Content-Type': 'application/json'
            },
@@ -81,17 +80,6 @@ class addDistributor extends React.Component {
                         value={this.state.email}
                         onChange={e => this.handleChange(e)}
               />
-
-               <MDBInput
-                    label="Distributor's password"
-                    icon="lock"
-                    group
-                    type="password"
-                    validate
-                    name='password'
-                        value={this.state.password}
-                        onChange={e => this.handleChange(e)}
-                  />  
             
               <MDBInput
                 type="textarea"
@@ -105,7 +93,7 @@ class addDistributor extends React.Component {
              
             </div>
             <div className="text-center">
-              <MDBBtn outline color="secondary" onClick={(e) => this.onSubmit(e)}>
+              <MDBBtn outline color="success" onClick={(e) => this.onSubmit(e)}>
                 Send <MDBIcon far icon="paper-plane" className="ml-1" />
               </MDBBtn>
             </div>

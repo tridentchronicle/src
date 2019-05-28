@@ -10,7 +10,6 @@ class addRetailer extends React.Component {
         this.state = {
             name: '',
             email:'',
-            password:'',
             country: ''
         };
     }
@@ -26,14 +25,13 @@ class addRetailer extends React.Component {
        const form = {
         name: this.state.name,
         email: this.state.email,
-        password: this.state.password,
         country: this.state.country
        }
          {/* Send data to API*/}
          var authOptions = {
           method: 'post',
-          url: 'http://localhost:3000/api/org.authentication.whey.addRetailer',
-          data: JSON.stringify({"name": this.state.name,"email": this.state.email,"password": this.state.password,"country": this.state.country}),
+          url: 'http://35.229.19.138:3000/api/org.authentication.whey.addRetailer',
+          data: JSON.stringify({"name": this.state.name,"email": this.state.email,"country": this.state.country}),
           headers: {
             'Content-Type': 'application/json'
            },
@@ -82,16 +80,7 @@ class addRetailer extends React.Component {
                         onChange={e => this.handleChange(e)}
               />
 
-               <MDBInput
-                    label="Retailer's password"
-                    icon="lock"
-                    group
-                    type="password"
-                    validate
-                    name='password'
-                        value={this.state.password}
-                        onChange={e => this.handleChange(e)}
-                  />  
+             
             
               <MDBInput
                 type="textarea"
@@ -105,7 +94,7 @@ class addRetailer extends React.Component {
              
             </div>
             <div className="text-center">
-              <MDBBtn outline color="secondary" onClick={(e) => this.onSubmit(e)}>
+              <MDBBtn outline color="success" onClick={(e) => this.onSubmit(e)}>
                 Send <MDBIcon far icon="paper-plane" className="ml-1" />
               </MDBBtn>
             </div>

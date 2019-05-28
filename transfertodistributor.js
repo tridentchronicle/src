@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './transfertodistributor.css';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput } from 'mdbreact';
 
 class transfertodistributor extends React.Component {
     constructor(props) {
@@ -27,8 +28,8 @@ class transfertodistributor extends React.Component {
          {/* Send data to API*/}
          var authOptions = {
           method: 'post',
-          url: 'http://localhost:3000/api/org.authentication.whey.transfertodistributor',
-          data: JSON.stringify({"whey": "resource:org.authentication.whey.WheyProtein#"+this.state.assetkey,"distributor": "resource:org.authentication.whey.Distributor#"+this.state.distributorid}),
+          url: 'http://35.229.19.138:3000/api/org.authentication.whey.transfertodistributor',
+          data: JSON.stringify({"whey": "resource:org.authentication.whey.WheyProtein#"+this.state.assetkey,"distributor": "resource:org.authentication.whey.Distributor#"+this.state.distributorid,"DistributorId":this.state.distributorid}),
           headers: {
             'Content-Type': 'application/json'
            },
@@ -47,23 +48,47 @@ class transfertodistributor extends React.Component {
     render() {
         return (
             <div class="main5">
-            <form>
-                <label>
-                    Whey id:
-                    <input
-                        name='assetkey'
+             <MDBContainer>
+      <MDBRow>
+        <MDBCol md="6">
+          <form>
+            <p className="h5 text-center mb-4">TRANSFER TO DISTRIBUTOR</p>
+            <div className="grey-text">
+              <MDBInput
+                label="Whey Id"
+                icon="tag"
+                group
+                type="text"
+                validate
+                error="wrong"
+                success="right"
+                name='assetkey'
                         value={this.state.assetkey}
-                        onChange={e => this.handleChange(e)}/>
-                </label>
-                <label>
-                    Distributor id:
-                    <input 
-                        name='distributorid'
-                        value={this.state.distributorid} 
-                        onChange={e => this.handleChange(e)}/>
-                </label>
-                <button onClick={(e) => this.onSubmit(e)}>TRANSFER</button>         
-            </form>
+                        onChange={e => this.handleChange(e)}
+              />
+              <MDBInput
+                label="Distributor's email"
+                icon="envelope"
+                group
+                type="email"
+                validate
+                error="wrong"
+                success="right"
+                name='distributorid'
+                        value={this.state.distributorid}
+                        onChange={e => this.handleChange(e)}
+              />
+         
+            </div>
+            <div className="text-center">
+              <MDBBtn outline color="success" onClick={(e) => this.onSubmit(e)}>
+                TRANSFER <MDBIcon far icon="paper-plane" className="ml-1" />
+              </MDBBtn>
+            </div>
+          </form>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
             </div>
         );
     }

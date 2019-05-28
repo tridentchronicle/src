@@ -43,7 +43,7 @@ export default class Login2 extends React.Component {
         
         var n = responseJson.length;
         for (var i = 0; i < n; i++) {
-        if(this.state.email==responseJson[i].email && this.state.password==responseJson[i].password ){
+        if(this.state.email==responseJson[i].email && this.state.password==responseJson[i].name ){
          
           
           if(this.state.type=="Manufacturer"){
@@ -97,7 +97,7 @@ export default class Login2 extends React.Component {
        
         <Redirect to={{
           pathname: '/dashboard',
-          state: { uid: this.state.id, ref:this.state.email }
+          state: { uid: this.state.id, ref:this.state.email , utype:this.state.type}
       }} />
 
         )
@@ -107,8 +107,8 @@ export default class Login2 extends React.Component {
           return (
       
             <Redirect to={{
-              pathname: '/DistWelcome',
-              state: { uid: this.state.id, ref:this.state.email }
+              pathname: '/dashboard',
+              state: { uid: this.state.id, ref:this.state.email, utype:this.state.type}
           }} />
 
       )
@@ -118,8 +118,8 @@ export default class Login2 extends React.Component {
         return (
     
     <Redirect to={{
-          pathname: '/RetWelcome',
-          state: { uid: this.state.id, ref:this.state.email }
+          pathname: '/dashboard',
+          state: { uid: this.state.id, ref:this.state.email, utype:this.state.type}
       }} />
     )
     }

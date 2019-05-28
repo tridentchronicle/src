@@ -16,7 +16,7 @@ class Fourth extends React.Component {
   </div>
   <div class="img-container2">
  <b>ANALYTICS</b> <br></br>
- <br></br>Abbyfy provides tools which provide detailed analytics for your product.
+ <br></br>Abbyfy tenders many tools which provide you detailed analytics for your product.
 
   </div>
   <br></br>

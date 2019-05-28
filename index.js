@@ -6,8 +6,11 @@ import Header from './header';
 import Login2 from './Login2';
 import Footer from './footer';
 import Home from './home';
+import Fetch from './Fetch';
+import Log from './Login';
 import addWhey from './addWhey';
 import sellWhey from './sellWhey';
+import Inventory from './inventory';
 import addDistributor from './addDistributor';
 import addRetailer from './addRetailer';
 import transfertoretailer from './transfertoretailer';
@@ -15,7 +18,8 @@ import transfertodistributor from './transfertodistributor';
 import ManfWelcome from './ManfWelcome';
 import DistWelcome from './DistWelcome';
 import RetWelcome from './RetWelcome';
-import Scanner from './Scanner';
+import Scan from './scan';
+import Pass from './pass';
 import Fourth from './fourth';
 import Dashboard from './dashboard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -33,7 +37,7 @@ class Interface extends React.Component {
          <div>
                  <BrowserRouter> 
      <Route path="/" exact component={Home} />
-         <Route path = "/scan" component = {Scanner} />
+         <Route path = "/scan" component = {Scan} />
          <Route path = "/home" component = {Home} />
          <Route path = "/account" component = {Login2} />
          <Route path = "/ManfWelcome" component = {ManfWelcome} />
@@ -46,6 +50,10 @@ class Interface extends React.Component {
          <Route path = "/addRetailer" component = {addRetailer} />
          <Route path = "/sellWhey" component = {sellWhey} />
          <Route path = "/dashboard" component = {Dashboard} />
+         <Route path = "/inventory" component = {Inventory} />
+         <Route path = "/fetch" component = {Fetch} />
+         <Route path = "/pass" component = {Pass} />
+         <Route path = "/logintest" component = {Log} />
 
 
         </BrowserRouter>
