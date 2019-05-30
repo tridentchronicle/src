@@ -36,19 +36,23 @@ export default class Login2 extends React.Component {
             window.confirm("Please select login type"); 
           }else{
         
-            axios.post('http://localhost:3000/login/', {
+            axios.post('http://35.229.19.138:3005/login/', {
               email: this.state.email,
               password: this.state.password,
               category: this.state.type
             })
             .then((response) => {
               
-              console.log(this.state.type)
-              console.log(response.data.output[0].category)
-              if(response.data.output[0].category==this.state.type){
+              if(response.data.output.length === 0 )
+              {
+                window.confirm("INVALID CREDENTIALS"); 
+              }
+              else {
+                if(response.data.output[0].category==this.state.type){
                 this.setState({redirectToReferrer: true});
                
-              }
+              }}
+              
 
 
             })
@@ -62,11 +66,8 @@ export default class Login2 extends React.Component {
    
                }
               
-               console.log(this.state.redirectToReferrer)
-               if(this.state.redirectToReferrer=false)
-               {
-                window.confirm("INVALID CREDENTIALS"); 
-               }
+             
+              
                
               
               }
@@ -203,6 +204,8 @@ export default class Login2 extends React.Component {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+
+    
     </div>
     </div></div>
   );
