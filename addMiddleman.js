@@ -1,16 +1,19 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput } from 'mdbreact';
 import axios from 'axios';
-import './addRetailer.css';
+import Dashboard from './dashboard';
+import './addMiddleman.css';
 
 
-class addRetailer extends React.Component {
+class addMiddleman extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             name: '',
             email:'',
-            country: ''
+            country: '',
+            arrivalplace: "",
+            deptplace: ""
         };
     }
     
@@ -30,8 +33,8 @@ class addRetailer extends React.Component {
          {/* Send data to API*/}
          var authOptions = {
           method: 'post',
-          url: 'http://35.229.19.138:3000/api/org.authentication.whey.addRetailer',
-          data: JSON.stringify({"name": this.state.name,"email": this.state.email,"country": this.state.country}),
+          url: 'http://35.229.19.138:3000/api/org.authentication.whey.addMiddleman',
+          data: JSON.stringify({"name": this.state.name,"email": this.state.email,"country": this.state.country,"arrivalplace":this.state.arrivalplace,"deptplace":this.state.deptplace}),
           headers: {
             'Content-Type': 'application/json'
            },
@@ -53,15 +56,15 @@ class addRetailer extends React.Component {
     }
     render() {
   return (
-    <div class="main4">
+    <div class="main3">
     <MDBContainer>
       <MDBRow>
         <MDBCol md="6">
           <form>
-            <p className="h5 text-center mb-4">ADD RETAILER</p>
+            <p className="h5 text-center mb-4">ADD MIDDLEMAN</p>
             <div className="grey-text">
               <MDBInput
-                label="Retailer's name"
+                label="Middleman's name"
                 icon="user"
                 group
                 type="text"
@@ -73,7 +76,7 @@ class addRetailer extends React.Component {
                         onChange={e => this.handleChange(e)}
               />
               <MDBInput
-                label="Retailer's email"
+                label="Middleman's email"
                 icon="envelope"
                 group
                 type="email"
@@ -84,13 +87,35 @@ class addRetailer extends React.Component {
                         value={this.state.email}
                         onChange={e => this.handleChange(e)}
               />
-
-             
+              <MDBInput
+                label="Departure Place"
+                icon="user"
+                group
+                type="text"
+                validate
+                error="wrong"
+                success="right"
+                name='deptplace'
+                        value={this.state.deptplace}
+                        onChange={e => this.handleChange(e)}
+              />
+              <MDBInput
+                label="Arrival Place"
+                icon="user"
+                group
+                type="text"
+                validate
+                error="wrong"
+                success="right"
+                name='arrivalplace'
+                        value={this.state.arrivalplace}
+                        onChange={e => this.handleChange(e)}
+              />
             
               <MDBInput
                 type="textarea"
                 rows="2"
-                label="Retailer's address"
+                label="Middleman's address"
                 icon="pencil-alt"
                 name='country'
                         value={this.state.country}
@@ -100,7 +125,7 @@ class addRetailer extends React.Component {
             </div>
             <div className="text-center">
               <MDBBtn outline color="success" onClick={(e) => this.onSubmit(e)}>
-                ADD<MDBIcon far icon="paper-plane" className="ml-1" />
+                ADD <MDBIcon far icon="paper-plane" className="ml-1" />
               </MDBBtn>
             </div>
           </form>
@@ -111,4 +136,4 @@ class addRetailer extends React.Component {
   );
 }}
 
-export default addRetailer;
+export default addMiddleman;

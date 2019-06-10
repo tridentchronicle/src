@@ -40,7 +40,12 @@ class addDistributor extends React.Component {
          };
       axios(authOptions)
          .then((response) => {
-             console.log(response);
+          if(response.status==200){
+            window.confirm("Added succesfully"); 
+          }
+          else{
+            window.confirm("SOMETHING WENT WRONG"); 
+          }
              })
          .catch((error) => {
             alert(error)
@@ -94,7 +99,7 @@ class addDistributor extends React.Component {
             </div>
             <div className="text-center">
               <MDBBtn outline color="success" onClick={(e) => this.onSubmit(e)}>
-                Send <MDBIcon far icon="paper-plane" className="ml-1" />
+                ADD <MDBIcon far icon="paper-plane" className="ml-1" />
               </MDBBtn>
             </div>
           </form>

@@ -1,16 +1,14 @@
-import React from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput } from 'mdbreact';
+import React from 'react';
 import axios from 'axios';
-import './addRetailer.css';
+import './transfertosuper.css';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput } from 'mdbreact';
 
-
-class addRetailer extends React.Component {
+class transfertosuper extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            email:'',
-            country: ''
+            assetkey: '',
+            superid: ''
         };
     }
     
@@ -21,17 +19,17 @@ class addRetailer extends React.Component {
     }
     
     onSubmit = (e) => {
+       
        e.preventDefault();
        const form = {
-        name: this.state.name,
-        email: this.state.email,
-        country: this.state.country
+        assetkey: this.state.assetkey,
+        distributorid: this.state.distributorid
        }
          {/* Send data to API*/}
          var authOptions = {
           method: 'post',
-          url: 'http://35.229.19.138:3000/api/org.authentication.whey.addRetailer',
-          data: JSON.stringify({"name": this.state.name,"email": this.state.email,"country": this.state.country}),
+          url: 'http://35.229.19.138:3000/api/org.authentication.whey.transfertosuper',
+          data: JSON.stringify({"whey": "resource:org.authentication.whey.WheyProtein#"+this.state.assetkey,"thesuper": "resource:org.authentication.whey.Super#"+this.state.superid,"SuperId":this.state.superid}),
           headers: {
             'Content-Type': 'application/json'
            },
@@ -40,7 +38,7 @@ class addRetailer extends React.Component {
       axios(authOptions)
          .then((response) => {
           if(response.status==200){
-            window.confirm("Added succesfully"); 
+            window.confirm("Transfer successfull"); 
           }
           else{
             window.confirm("SOMETHING WENT WRONG"); 
@@ -51,64 +49,55 @@ class addRetailer extends React.Component {
            })
       
     }
+    
     render() {
-  return (
-    <div class="main4">
-    <MDBContainer>
+        return (
+            <div class="main5">
+             <MDBContainer>
       <MDBRow>
         <MDBCol md="6">
           <form>
-            <p className="h5 text-center mb-4">ADD RETAILER</p>
+            <p className="h5 text-center mb-4">TRANSFER TO SUPER</p>
             <div className="grey-text">
               <MDBInput
-                label="Retailer's name"
-                icon="user"
+                label="Whey Id"
+                icon="tag"
                 group
                 type="text"
                 validate
                 error="wrong"
                 success="right"
-                name='name'
-                        value={this.state.name}
+                name='assetkey'
+                        value={this.state.assetkey}
                         onChange={e => this.handleChange(e)}
               />
               <MDBInput
-                label="Retailer's email"
+                label="Super's email"
                 icon="envelope"
                 group
                 type="email"
                 validate
                 error="wrong"
                 success="right"
-                name='email'
-                        value={this.state.email}
+                name='superid'
+                        value={this.state.superid}
                         onChange={e => this.handleChange(e)}
               />
-
-             
-            
-              <MDBInput
-                type="textarea"
-                rows="2"
-                label="Retailer's address"
-                icon="pencil-alt"
-                name='country'
-                        value={this.state.country}
-                        onChange={e => this.handleChange(e)}
-              />
-             
+         
             </div>
             <div className="text-center">
               <MDBBtn outline color="success" onClick={(e) => this.onSubmit(e)}>
-                ADD<MDBIcon far icon="paper-plane" className="ml-1" />
+                TRANSFER <MDBIcon far icon="paper-plane" className="ml-1" />
               </MDBBtn>
             </div>
           </form>
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-    </div>
-  );
-}}
+            </div>
+        );
+    }
+    }
 
-export default addRetailer;
+   export default transfertosuper;
+  

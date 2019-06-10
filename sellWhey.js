@@ -55,7 +55,12 @@ onSubmit = (e) => {
      };
   axios(authOptions)
      .then((response) => {
-         console.log(response);
+      if(response.status==200){
+        window.confirm("Sold succesfully"); 
+      }
+      else{
+        window.confirm("SOMETHING WENT WRONG"); 
+      }
          })
      .catch((error) => {
         alert(error)

@@ -37,7 +37,12 @@ class transfertodistributor extends React.Component {
          };
       axios(authOptions)
          .then((response) => {
-             console.log(response);
+          if(response.status==200){
+            window.confirm("Transfer successfull"); 
+          }
+          else{
+            window.confirm("SOMETHING WENT WRONG"); 
+          }
              })
          .catch((error) => {
             alert(error)

@@ -25,7 +25,7 @@ body {
 
 /* Change the link color on hover */
     .ui.menu#side-menu a.item:hover, .ui.menu#side-menu a.active {
-    background-color: #555;
+    background-color: green;
     color: white;
 }
 

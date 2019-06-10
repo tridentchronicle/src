@@ -30,7 +30,7 @@ class transfertoretailer extends React.Component {
          var authOptions = {
           method: 'post',
           url: 'http://35.229.19.138:3000/api/org.authentication.whey.transfertoretailer',
-          data: JSON.stringify({"whey": "resource:org.authentication.whey.WheyProtein#"+this.state.assetkey,"retailer": "resource:org.authentication.whey.Retailer#"+this.state.retailerid}),
+          data: JSON.stringify({"whey": "resource:org.authentication.whey.WheyProtein#"+this.state.assetkey,"retailer": "resource:org.authentication.whey.Retailer#"+this.state.retailerid, "RetailerId":this.state.retailerid}),
           headers: {
             'Content-Type': 'application/json'
            },
@@ -38,7 +38,12 @@ class transfertoretailer extends React.Component {
          };
       axios(authOptions)
          .then((response) => {
-             console.log(response);
+          if(response.status==200){
+            window.confirm("Transfer successfull"); 
+          }
+          else{
+            window.confirm("SOMETHING WENT WRONG"); 
+          }
              })
          .catch((error) => {
             alert(error)

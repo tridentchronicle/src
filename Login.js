@@ -1,73 +1,62 @@
-
-  import React, { Component } from "react";
-  import {Redirect} from 'react-router-dom';
-    import Form from 'react-bootstrap/Form'
-    import Button from 'react-bootstrap/Button'
-    import Bootstrap from "react-bootstrap";
- // import "./Login.css";
-  import GetLoginData from './GetLoginData'
-
-
-    export default class Login extends Component {
-      constructor(){
-        super();
-        this.state = {
-        name: '',
-        country: '',
-        redirectToReferrer: false
-        };
-        this.login = this.login.bind(this);
-        this.onChange = this.onChange.bind(this);
-        }
-        
-        
-        login() {
-        if(this.state.name && this.state.country){
-        GetLoginData().then((result) => {
-        let responseJson = result;
-        var n = responseJson.length;
-        for (var i = 0; i < n; i++) {
-        if(this.state.name==responseJson[i].name && this.state.country==responseJson[i].country ){
-        this.setState({redirectToReferrer: true});
-        break;
-        }
-       
-      }
-        });
-        
-      }
-        }
-        
-        
-        onChange(e){
-        this.setState({[e.target.name]:e.target.value});
-        }
-
-        render() {
-        
-        
-        if (this.state.redirectToReferrer ){
-        return (<Redirect to={'/home'}/>)
-        }
-        
-        
-        
-        return (
-        <div className="row" id="Body">
-        <div className="medium-5 columns left">
-        <h4>Login</h4>
-        <label>Username</label>
-        <input type="text" name="name" onChange={this.onChange}/>
-        <label>Password</label>
-        <input type="password" name="country" onChange={this.onChange}/>
-        <input type="submit" value="Login" onClick={this.login}/>
-        <a href="/signup">Registration</a>
-        </div>
-        </div>
-        );
-        }
-        }
+import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
+import {PostData} from './PostData';
+import './Login.css';
+import axios from 'axios';
+class Login extends Component {
+constructor(){
+super();
+this.state = {
+email: '',
+password: '',
+redirectToReferrer: false
+};
+this.login = this.login.bind(this);
+this.onChange = this.onChange.bind(this);
+}
 
 
-        
-       
+login() {
+  axios.get("https://learningphp1234.000webhostapp.com/android/reactlogin.php?username=15bcs035@smvdu.ac.in&password=qwerty123&category=student")
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .finally(function () {
+    // always executed
+  });
+
+}
+
+
+onChange(e){
+this.setState({[e.target.name]:e.target.value});
+}
+render() {
+
+
+if (this.state.redirectToReferrer || sessionStorage.getItem('userData')){
+return (<Redirect to={'/home'}/>)
+}
+
+
+return (
+<div className="row" id="Body">
+<div className="medium-5 columns left">
+<h4>Login</h4>
+<label>Username</label>
+<input type="text" name="email" onChange={this.onChange}/>
+<label>Password</label>
+<input type="password" name="password" onChange={this.onChange}/>
+<input type="submit" value="Login" onClick={this.login}/>
+<a href="/signup">Registration</a>
+</div>
+</div>
+);
+}
+}
+export default Login;

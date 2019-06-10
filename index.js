@@ -20,7 +20,11 @@ import DistWelcome from './DistWelcome';
 import RetWelcome from './RetWelcome';
 import Scan from './scan';
 import Pass from './pass';
+import Cart from './Cart';
+import Card from './card';
+import Address from './Address';
 import Fourth from './fourth';
+import Product from './Product';
 import Dashboard from './dashboard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -54,6 +58,11 @@ class Interface extends React.Component {
          <Route path = "/fetch" component = {Fetch} />
          <Route path = "/pass" component = {Pass} />
          <Route path = "/logintest" component = {Log} />
+         <Route path = "/card" component = {Card} />
+         <Route path = "/product" component = {Product} />
+         <Route path = "/cart" component = {Cart} />
+         <Route path = "/billing" component = {Address} />
+         
 
 
         </BrowserRouter>

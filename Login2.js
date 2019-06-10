@@ -7,6 +7,7 @@ import GetLoginData from './GetLoginData'
 import addWhey from './addWhey';
 import Home from './home';
 import { Form,Col,Button } from 'react-bootstrap';
+import axios from 'axios';
 
 
 export default class Login2 extends React.Component {
@@ -24,10 +25,7 @@ export default class Login2 extends React.Component {
         this.handleChange3  = this.handleChange3 .bind(this);
         }
 
-        handleClose = () => {
-          <Redirect to={'/home'}/>
-        }
-
+        
       
         
         
@@ -37,43 +35,42 @@ export default class Login2 extends React.Component {
           {
             window.confirm("Please select login type"); 
           }else{
-        if(this.state.email && this.state.password){
-        GetLoginData(this.state.type).then((result) => {
-        let responseJson = result;
         
-        var n = responseJson.length;
-        for (var i = 0; i < n; i++) {
-        if(this.state.email==responseJson[i].email && this.state.password==responseJson[i].name ){
-         
+            axios.post('http://35.229.19.138:3005/login/', {
+              email: this.state.email,
+              password: this.state.password,
+              category: this.state.type
+            })
+            .then((response) => {
+              
+              if(response.data.output.length === 0 )
+              {
+                window.confirm("INVALID CREDENTIALS"); 
+              }
+              else {
+                if(response.data.output[0].category==this.state.type){
+                this.setState({redirectToReferrer: true});
+               
+              }}
+              
+
+
+            })
+            .catch((e) => 
+            {
+              console.error(e);
+            });
           
-          if(this.state.type=="Manufacturer"){
-            this.state.id=responseJson[i].manufacturerId;
-        }
-
-        if(this.state.type=="Distributor"){
-           this.state.id=responseJson[i].distributorId; 
-      }
-
-      if(this.state.type=="Retailer"){
-         this.state.id=responseJson[i].retailerId;    
-    }
-        this.setState({redirectToReferrer: true});
-             break;
-        }
-        
-       
-      }
-      if (this.state.redirectToReferrer ){
-        
-    }
-       else{
-        window.confirm("INVALID CREDENTIALS"); 
-      }
-      
-        });
-        
-      }}
-        }
+  
+  
+   
+               }
+              
+             
+              
+               
+              
+              }
         
         
         onChange(e){
@@ -87,44 +84,22 @@ export default class Login2 extends React.Component {
       }
 
         render() {  
-         
-          if (this.state.redirectToReferrer ){
-          
-
-            if(this.state.type=="Manufacturer"){
-            return (
-        
-       
-        <Redirect to={{
-          pathname: '/dashboard',
-          state: { uid: this.state.id, ref:this.state.email , utype:this.state.type}
-      }} />
-
-        )
-        }
-
-        if(this.state.type=="Distributor"){
-          return (
-      
-            <Redirect to={{
-              pathname: '/dashboard',
-              state: { uid: this.state.id, ref:this.state.email, utype:this.state.type}
-          }} />
-
-      )
-      }
-
-      if(this.state.type=="Retailer"){
-        return (
     
-    <Redirect to={{
-          pathname: '/dashboard',
-          state: { uid: this.state.id, ref:this.state.email, utype:this.state.type}
-      }} />
-    )
-    }
-      }
-		
+          if(this.state.redirectToReferrer)
+          {
+            return (
+      
+     
+              <Redirect to={{
+                pathname: '/dashboard',
+                state: { uid: this.state.id, ref:this.state.email , utype:this.state.type}
+            }} />
+      
+              )
+          }
+          
+          
+         
   return (
     <div>
       <Home/>
@@ -229,6 +204,8 @@ export default class Login2 extends React.Component {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+
+    
     </div>
     </div></div>
   );

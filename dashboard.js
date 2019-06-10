@@ -3,8 +3,12 @@ import AddWhey from './addWhey';
 import SellWhey from './sellWhey';
 import TransferD from './transfertodistributor';
 import TransferR from './transfertoretailer';
+import TransferS from './transfertosuper';
+import TransferM from './transfertomiddleman';
 import AddDistributor from './addDistributor';
 import AddRetailer from './addRetailer';
+import AddSuper from './addSuper';
+import AddMiddleman from './addMiddleman';
 import Header2 from './header2';
 import Footer from './footer';
 import Fourth from './fourth';
@@ -12,6 +16,8 @@ import Inventory from './inventory';
 import Fetch from './Fetch';
 import Distributors from './Distributors';
 import Retailers from './Retailers';
+import Supers from './Supers';
+import Middlemans from './Middlemans';
 
 import './dashboard.css';
 import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
@@ -100,6 +106,12 @@ class SideNavComponent extends React.Component {
             active={activeItem === "addwhey"}
             onClick={this.handleItemClick}
           />
+
+          <Menu.Item
+            name="Add Super"
+            active={activeItem === "addsuper"}
+            onClick={this.handleItemClick}
+          />
            <Menu.Item
             name="Add Distributor"
             active={activeItem === "adddistributor"}
@@ -110,6 +122,19 @@ class SideNavComponent extends React.Component {
             active={activeItem === "addretailer"}
             onClick={this.handleItemClick}
           />
+
+          <Menu.Item
+            name="Add Middleman"
+            active={activeItem === "addmiddleman"}
+            onClick={this.handleItemClick}
+          />
+
+           <Menu.Item
+            name="Transfer to super"
+            active={activeItem === "transfers"}
+            onClick={this.handleItemClick}
+          />
+
           <Menu.Item
             name="Transfer to distributor"
             active={activeItem === "transferd"}
@@ -118,6 +143,12 @@ class SideNavComponent extends React.Component {
           <Menu.Item
             name="Transfer to retailer"
             active={activeItem === "transferr"}
+            onClick={this.handleItemClick}
+          />
+
+         <Menu.Item
+            name="Transfer to Middleman"
+            active={activeItem === "transferm"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
@@ -130,13 +161,25 @@ class SideNavComponent extends React.Component {
             active={activeItem === "sell"}
             onClick={this.handleItemClick}
           />
+          
           <Menu.Item
+            name="Supers"
+            active={activeItem === "sell"}
+            onClick={this.handleItemClick}
+          />
+              <Menu.Item
             name="Distributors"
             active={activeItem === "sell"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             name="Retailers"
+            active={activeItem === "sell"}
+            onClick={this.handleItemClick}
+          />
+
+         <Menu.Item
+            name="Middlemans"
             active={activeItem === "sell"}
             onClick={this.handleItemClick}
           />
@@ -156,10 +199,20 @@ class SideNavComponent extends React.Component {
             active={activeItem === "profile"}
             onClick={this.handleItemClick}
           />
+           <Menu.Item
+            name="Transfer to super"
+            active={activeItem === "transfers"}
+            onClick={this.handleItemClick}
+          />
 
           <Menu.Item
             name="Transfer to retailer"
             active={activeItem === "transferr"}
+            onClick={this.handleItemClick}
+          />
+           <Menu.Item
+            name="Transfer to Middleman"
+            active={activeItem === "transferm"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
@@ -216,6 +269,12 @@ class SideNavComponent extends React.Component {
              else if(this.state.activeItem=="Add Distributor"){
               return( <AddDistributor />)
              }
+             else if(this.state.activeItem=="Add Super"){
+              return( <AddSuper />)
+             }
+             else if(this.state.activeItem=="Add Middleman"){
+              return( <AddMiddleman />)
+             }
              else if(this.state.activeItem=="Sell Whey Protein"){
                 return( <SellWhey TextBoxValue={this.state.TextBoxValue} />)
                }
@@ -225,11 +284,23 @@ class SideNavComponent extends React.Component {
                else if(this.state.activeItem=="Transfer to distributor"){
                 return( <TransferD />)
                }
+               else if(this.state.activeItem=="Transfer to super"){
+                return( <TransferS />)
+               }
+               else if(this.state.activeItem=="Transfer to Middleman"){
+                return( <TransferM />)
+               }
                else if(this.state.activeItem=="Add Retailer"){
                 return( <AddRetailer />)
                }
                else if(this.state.activeItem=="Distributors"){
                 return( <Distributors />)
+               }
+               else if(this.state.activeItem=="Middlemans"){
+                return( <Middlemans />)
+               }
+               else if(this.state.activeItem=="Supers"){
+                return( <Supers />)
                }
                else if(this.state.activeItem=="Retailers"){
                 return( <Retailers />)

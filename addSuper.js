@@ -1,10 +1,11 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput } from 'mdbreact';
 import axios from 'axios';
-import './addRetailer.css';
+import Dashboard from './dashboard';
+import './addSuper.css';
 
 
-class addRetailer extends React.Component {
+class addSuper extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,7 +31,7 @@ class addRetailer extends React.Component {
          {/* Send data to API*/}
          var authOptions = {
           method: 'post',
-          url: 'http://35.229.19.138:3000/api/org.authentication.whey.addRetailer',
+          url: 'http://35.229.19.138:3000/api/org.authentication.whey.addSuper',
           data: JSON.stringify({"name": this.state.name,"email": this.state.email,"country": this.state.country}),
           headers: {
             'Content-Type': 'application/json'
@@ -53,15 +54,15 @@ class addRetailer extends React.Component {
     }
     render() {
   return (
-    <div class="main4">
+    <div class="main3">
     <MDBContainer>
       <MDBRow>
         <MDBCol md="6">
           <form>
-            <p className="h5 text-center mb-4">ADD RETAILER</p>
+            <p className="h5 text-center mb-4">ADD SUPER</p>
             <div className="grey-text">
               <MDBInput
-                label="Retailer's name"
+                label="Super's name"
                 icon="user"
                 group
                 type="text"
@@ -73,7 +74,7 @@ class addRetailer extends React.Component {
                         onChange={e => this.handleChange(e)}
               />
               <MDBInput
-                label="Retailer's email"
+                label="Super's email"
                 icon="envelope"
                 group
                 type="email"
@@ -84,13 +85,11 @@ class addRetailer extends React.Component {
                         value={this.state.email}
                         onChange={e => this.handleChange(e)}
               />
-
-             
             
               <MDBInput
                 type="textarea"
                 rows="2"
-                label="Retailer's address"
+                label="Super's address"
                 icon="pencil-alt"
                 name='country'
                         value={this.state.country}
@@ -100,7 +99,7 @@ class addRetailer extends React.Component {
             </div>
             <div className="text-center">
               <MDBBtn outline color="success" onClick={(e) => this.onSubmit(e)}>
-                ADD<MDBIcon far icon="paper-plane" className="ml-1" />
+               ADD <MDBIcon far icon="paper-plane" className="ml-1" />
               </MDBBtn>
             </div>
           </form>
@@ -111,4 +110,4 @@ class addRetailer extends React.Component {
   );
 }}
 
-export default addRetailer;
+export default addSuper;

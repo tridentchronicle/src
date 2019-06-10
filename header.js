@@ -52,7 +52,7 @@ class Header extends React.Component {
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
      
-      <Nav.Link href="/scan"><font color="#383838">PRODUCT</font></Nav.Link>
+      <Nav.Link href="/card"><font color="#383838">PRODUCT</font></Nav.Link>
       <Nav.Link href="/scan" ><font color="#383838">PLANS & PRICING</font> </Nav.Link>
       <Nav.Link href="/scan" ><font color="#383838">SCAN</font></Nav.Link>
       <NavDropdown title="Something" id="basic-nav-dropdown">
