@@ -187,6 +187,13 @@ class Message extends React.Component {
       
     async send(from,to,cont,dated)
       {
+        if(this.state.beta==1)
+        {
+alert("click on view messages first");
+        }
+        else{
+
+        
         axios.post('http://35.229.19.138:3005/sendmessages/', {
           user_id_from: from,
           user_id_to:to,
@@ -196,6 +203,7 @@ class Message extends React.Component {
         .then((response) => {
          console.log(response)
       })
+    }
       }
     
       render() { 
