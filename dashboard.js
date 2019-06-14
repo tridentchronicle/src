@@ -18,11 +18,22 @@ import Distributors from './Distributors';
 import Retailers from './Retailers';
 import Supers from './Supers';
 import Middlemans from './Middlemans';
+import axios from 'axios';
+import Message from './message';
 
 import './dashboard.css';
 import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
 
 class MainPageComponent extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      data: [],
+      message:[]
+    };
+    
+    }
+
   render() {
     return (
       
@@ -40,7 +51,10 @@ class MainPageComponent extends React.Component {
           Also notice that we have set overflow:auto to sidenav. This will add a
           scrollbar when the sidenav is too long (for example if it has over 50
           links inside of it).
+        
         </p>
+    
+      
         <p>Some text..</p>
         <p>Some text..</p>
         <p>Some text..</p>
@@ -99,6 +113,11 @@ class SideNavComponent extends React.Component {
           <Menu.Item
             name="Profile"
             active={activeItem === "profile"}
+            onClick={this.handleItemClick}
+          />
+           <Menu.Item
+            name="Inbox"
+            active={activeItem === "inbox"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
@@ -199,6 +218,11 @@ class SideNavComponent extends React.Component {
             active={activeItem === "profile"}
             onClick={this.handleItemClick}
           />
+            <Menu.Item
+            name="Inbox"
+            active={activeItem === "inbox"}
+            onClick={this.handleItemClick}
+          />
            <Menu.Item
             name="Transfer to super"
             active={activeItem === "transfers"}
@@ -246,6 +270,11 @@ class SideNavComponent extends React.Component {
           active={activeItem === "profile"}
           onClick={this.handleItemClick}
         />
+          <Menu.Item
+            name="Inbox"
+            active={activeItem === "inbox"}
+            onClick={this.handleItemClick}
+          />
         <Menu.Item
           name="Sell Whey Protein"
           active={activeItem === "sell"}
@@ -305,12 +334,15 @@ class SideNavComponent extends React.Component {
                else if(this.state.activeItem=="Retailers"){
                 return( <Retailers />)
                }
+               else if(this.state.activeItem=="Inbox"){
+                return(<Message TextBoxValue={this.state.TextBoxValue}/>)
+               }
                
                else if(this.state.activeItem=="Whey Protein Inventory"){
                 return(  <Inventory TextBoxValue={this.state.TextBoxValue}/>)
                }
                else{
-                return( <MainPageComponent />)
+                return( <MainPageComponent/>)
                }
 
 
