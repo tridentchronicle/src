@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Table,  Button, DropdownButton, MenuItem } from 'react-bootstrap';
 import './message.css';
 import Card4 from './card4';
+import {Redirect,BrowserRouter} from 'react-router-dom';
 
 
 class Message extends React.Component {
@@ -18,11 +19,10 @@ class Message extends React.Component {
             unique2:[],
             unique3:[],
             counter:0,
+            message2:false,
             owner:'nil'
           }
           this.mapper=this.mapper.bind(this);
-          this.mess=this.mess.bind(this);
-          this.send=this.send.bind(this);
           this.getmessages=this.getmessages.bind(this);
           this.arrayUnique=this.arrayUnique.bind(this);
         
@@ -32,16 +32,8 @@ class Message extends React.Component {
         
         this.getmessages();
         this.interval = setInterval(() => this.getmessages(), 500);
-        
-        
-  
       }
-      scrollToBottom = () => {
-        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
-      }
-      componentDidUpdate () {
-        this.scrollToBottom()
-      }
+      
      
       getmessages()
       {
@@ -114,8 +106,9 @@ class Message extends React.Component {
       mapper(val,val2)
       {
         this.setState({beta: val});
+        this.setState({message2: true});
         this.setState({beta2: val2});
-        this.interval = setInterval(() => this.mess(), 1000);
+       
       }
 
       arrayUnique(array) {
@@ -130,90 +123,20 @@ class Message extends React.Component {
         return a;
     }
 
-      mess()
-      {
-        if(this.state.beta==1)
-        {
 
-        return(
-          <div class="lay2">
-          default
-          </div>
-        );
-        }
-        else if(this.state.beta!=1)
-        {
-          return(
-            <div>
-              
-          {  this.state.data3.filter((item) => (item.user_id_from ==  this.state.beta2 || item.user_id_from ==  this.state.beta ) && (item.user_id_to == this.state.beta || item.user_id_to ==  this.state.beta2) ).map((item, index) => {
-
- if(item.user_id_from == this.state.beta)
- {
- return (
-    <div class="lay2">
-       <br></br>
-     
-     {item.user_id_from} :{item.content}
-     <br></br>
-    </div>
-  );
- }
- else  if(item.user_id_from == this.state.beta2)
- {
- return (
-    <div class="lay1">
-       <br></br>
-       {item.user_id_from} :{item.content}
-      <br></br>
-    </div>
-  );
- }
-}) }
-            </div>
-          );
-
-        }
-
-      }
-     
-      handleChange = (e) => {
-        this.setState({
-            mymsg: e.target.value,
-        })
-    }
-
-
-      
-    async send(from,to,cont,dated)
-      {
-        if(this.state.beta==1)
-        {
-alert("click on view messages first");
-        }
-        else{
-
-        
-        axios.post('http://35.229.19.138:3005/sendmessages/', {
-          user_id_from: from,
-          user_id_to:to,
-          content: cont,
-          date_created:dated
-        })
-        .then((response) => {
-         console.log(response)
-      })
-    }
-      }
-    
       render() { 
+if(this.state.message2)
+{
+  return (
 
-        var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
 
-today = yyyy + '-' + mm + '-' + dd ;
+    <Redirect to={{
+      pathname: '/chat',
+      state: { uid: this.props.TextBoxValue[0],ref:this.state.beta2,utype:this.props.TextBoxValue[1]}
+  }} />
+
+    )
+}
 
 
         return (
@@ -222,24 +145,30 @@ today = yyyy + '-' + mm + '-' + dd ;
             {
 this.state.unique3.filter((item) => item != this.props.TextBoxValue[0] ).map((item, index) => {
   return (
-    <div>
-      {item} 
-      <button onClick={(e) => this.mapper(this.props.TextBoxValue[0],item)}>View Message</button>
+    
+      <div class="lab">
+
+<div class="row">
+    <button class="tablinks" onClick={(e) => this.mapper(this.props.TextBoxValue[0],item)}>
+     <div class="columnx2" >
+    <img src="https://cdn-images-1.medium.com/max/1200/1*MccriYX-ciBniUzRKAUsAw.png" width="30px" height="30px"/> 
+     </div>
+    <div class="columnx">
+    {item}
     </div>
+ 
+  <div class="columnx3">
+   2019
+     </div>
+    </button>
+
+</div>
+
+</div>
+     
   );
 })
-            }
-            <div class="main15" id="main15">
-            {this.mess()}
-            <div style={{ float:"left", clear: "both" }}
-             ref={(el) => { this.messagesEnd = el; }}>
-        </div>
-            </div>
-            <label>Your Message : </label>
-            
-<input type="text" name="mymsg" onChange={this.handleChange}/>
-<input type="submit" placeholder="Enter something..."  value="Send" onClick={(e) => this.send(this.state.beta,this.state.beta2,this.state.mymsg,today)}/>
-            
+}
            </div>
         );
       }
