@@ -17,7 +17,9 @@ import Fetch from './Fetch';
 import Distributors from './Distributors';
 import Retailers from './Retailers';
 import Supers from './Supers';
+import Profile from './profile';
 import Middlemans from './Middlemans';
+import Activity from './activity';
 import axios from 'axios';
 import Message from './message';
 
@@ -28,17 +30,37 @@ class MainPageComponent extends React.Component {
   constructor(){
     super();
     this.state = {
-      data: [],
+      data2: [],
       message:[]
     };
     
+    }
+    componentDidMount() {
+      axios.post('http://35.229.19.138:3005/profile/', {
+          email: this.props.TextBoxValue[0]
+        })
+        .then((response) => {
+          this.setState({ data2 : response.data.output });      
+          console.log(this.state.data2)
+
+      })
+
     }
 
   render() {
     return (
       
       <div className="main">
-        <h2>Fixed Full-height Side Nav</h2>
+        {this.state.data2.map(function(item, key) {
+                 
+                 return (
+                   <div>
+                      <h1> Welcome : {item.first_name} {item.last_name} , {item.category} </h1>               
+                        </div>
+                  )
+               
+               })}
+
         <h3>
           Try to scroll this area, and see how the sidenav sticks to the page
         </h3>
@@ -341,8 +363,14 @@ class SideNavComponent extends React.Component {
                else if(this.state.activeItem=="Whey Protein Inventory"){
                 return(  <Inventory TextBoxValue={this.state.TextBoxValue}/>)
                }
+               else if(this.state.activeItem=="Profile"){
+                return(  <Profile TextBoxValue={this.state.TextBoxValue}/>)
+               }
+               else if(this.state.activeItem=="Home"){
+                return(  <Activity TextBoxValue={this.state.TextBoxValue}/>)
+               }
                else{
-                return( <MainPageComponent/>)
+                return( <MainPageComponent TextBoxValue={this.state.TextBoxValue}/>)
                }
 
 

@@ -49,11 +49,44 @@ app.post('/login', function (req, res) {
     var email = req.body.email;
     var password = req.body.password;
     var category = req.body.category;
-    dbConn.query("SELECT category FROM login where email = ? AND password = ? AND category = ?", [email, password, category], function (error, results, fields) {
+    dbConn.query("SELECT category FROM users where email = ? AND password = ? AND category = ?", [email, password, category], function (error, results, fields) {
         if (error) throw error;
         return res.send({ error: false, output: results, message: 'success' });
     });
 });
+
+// Profile details
+app.post('/profile', function (req, res) {
+    
+    var email = req.body.email;
+    dbConn.query("SELECT * FROM users where email = ?", email , function (error, results, fields) {
+        return res.send({ error: false, output: results, message: 'success' });
+    });
+});
+
+// View Messages
+app.post('/mymessages', function (req, res) {
+    
+    var email = req.body.email;
+    dbConn.query("SELECT * FROM Messages where user_id_from = ? or user_id_to = ?", [email,email] , function (error, results, fields) {
+        if (error) throw error;
+        return res.send({ error: false, output: results, message: 'success' });
+    });
+});
+
+// Send Messages
+app.post('/sendmessages', function (req, res) {
+    
+    var from = req.body.from;
+    var to = req.body.to;
+    var content = req.body.content;
+    var date = req.body.date;
+    dbConn.query("INSERT INTO Messages ( message_id, user_id_from, user_id_to, content, date_created ) VALUES  ( null, ? , ? , ? , ? )", [from,to,content,date] , function (error, results, fields) {
+        if (error) throw error;
+        return res.send({ error: false, output: results, message: 'success' });
+    });
+});
+
 
 // Signup
 app.post('/signup', function (req, res) {
