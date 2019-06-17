@@ -34,10 +34,10 @@ class Message2 extends React.Component {
 
         this.setState({beta: this.props.location.state.uid});
         this.setState({beta2: this.props.location.state.ref});
-        this.interval = setInterval(() => this.mess(), 1000);
+        this.interval = setInterval(() => this.mess(), 10);
         
         this.getmessages();
-        this.interval = setInterval(() => this.getmessages(), 500);
+        this.interval = setInterval(() => this.getmessages(), 10);
         
         
   

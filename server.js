@@ -50,7 +50,6 @@ app.post('/login', function (req, res) {
     var password = req.body.password;
     var category = req.body.category;
     dbConn.query("SELECT category FROM users where email = ? AND password = ? AND category = ?", [email, password, category], function (error, results, fields) {
-        if (error) throw error;
         return res.send({ error: false, output: results, message: 'success' });
     });
 });
@@ -69,7 +68,6 @@ app.post('/mymessages', function (req, res) {
     
     var email = req.body.email;
     dbConn.query("SELECT * FROM Messages where user_id_from = ? or user_id_to = ?", [email,email] , function (error, results, fields) {
-        if (error) throw error;
         return res.send({ error: false, output: results, message: 'success' });
     });
 });
@@ -82,7 +80,6 @@ app.post('/sendmessages', function (req, res) {
     var content = req.body.content;
     var date = req.body.date;
     dbConn.query("INSERT INTO Messages ( message_id, user_id_from, user_id_to, content, date_created ) VALUES  ( null, ? , ? , ? , ? )", [from,to,content,date] , function (error, results, fields) {
-        if (error) throw error;
         return res.send({ error: false, output: results, message: 'success' });
     });
 });
@@ -91,19 +88,23 @@ app.post('/sendmessages', function (req, res) {
 // Signup
 app.post('/signup', function (req, res) {
     
+    var first_name = req.body.first_name;
+    var last_name = req.body.last_name;
+    var address = req.body.address;
     var email = req.body.email;
     var password = req.body.password;
-    dbConn.query("SELECT category FROM login where email = ? AND password = ?", [email, password], function (error, results, fields) {
-        if (error) throw error;
-        return res.send({ error: false, data: results, message: 'users list.' });
+    var category = req.body.category;
+    dbConn.query("INSERT INTO users ( id, first_name, last_name, address, email, password, category ) VALUES  ( null, ? , ? , ? , ? , ? , ?)", [first_name,last_name,address,email,password,category] , function (error, results, fields) {
+        return res.send({ error: false, output: results, message: 'success' });
     });
 });
+
  
  
  
 // set port
-app.listen(3000, function () {
-    console.log('Node app is running on port 3000');
+app.listen(3005, function () {
+    console.log('Node app is running on port 3005');
 });
  
 module.exports = app;

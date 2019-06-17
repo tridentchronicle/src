@@ -129,6 +129,7 @@ export default class Login2 extends React.Component {
         </Form.Group>
               <MDBInput
                 label="Your email"
+                icon="user"
                 validate
                 error="wrong"
 				success="right"
@@ -136,6 +137,7 @@ export default class Login2 extends React.Component {
               />
               <MDBInput
                 label="Your password"
+                icon="lock"
                 type="password"
                 validate
 				containerClass="mb-0"
@@ -150,7 +152,7 @@ export default class Login2 extends React.Component {
 				  className="btn-block z-depth-1a"
 				  value="Login" onClick={this.login}
                 >
-                  Sign in
+                  <font color="white">Sign in</font>
                 </MDBBtn>
               </div>
               <p className="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2">
@@ -194,7 +196,7 @@ export default class Login2 extends React.Component {
               </p>
               <p className="font-small grey-text d-flex justify-content-end">
                 Not a member?
-                <a href="#!" className="blue-text ml-1">
+                <a href="signup" className="blue-text ml-1">
 
                   Sign Up
                 </a>

@@ -27,6 +27,7 @@ import Fourth from './fourth';
 import Product from './Product';
 import Dashboard from './dashboard';
 import Message from './message2';
+import Signup from './Signup';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -64,6 +65,7 @@ class Interface extends React.Component {
          <Route path = "/cart" component = {Cart} />
          <Route path = "/billing" component = {Address} />
          <Route path = "/chat" component = {Message} />
+         <Route path = "/signup" component = {Signup} />
          
 
 
