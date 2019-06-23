@@ -30,21 +30,29 @@ class MainPageComponent extends React.Component {
   constructor(){
     super();
     this.state = {
+      checkMount:false,
       data2: [],
       message:[]
     };
-    
     }
+
     componentDidMount() {
-      axios.post('http://35.229.19.138:3005/profile/', {
+      this.state.checkMount=true;
+      
+      axios.post('http://35.229.19.138:8080/profile/', {
           email: this.props.TextBoxValue[0]
         })
         .then((response) => {
-          this.setState({ data2 : response.data.output });      
-          console.log(this.state.data2)
-
+          if(this.state.checkMount)
+      {
+          this.setState({ data2 : response.data.output });  
+        }    
       })
+    
+    }
 
+    componentWillUnmount() {
+      this.state.checkMount = false;
     }
 
   render() {

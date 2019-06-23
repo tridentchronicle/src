@@ -22,7 +22,15 @@
 text-align:right;
 }
 
-
+.trybutton {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  color:blue;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
 
 /* Style the tab */
 .lab {
@@ -91,4 +99,23 @@ text-align:right;
   content: "";
   display: table;
   clear: both;
+  
+}
+
+.popover {
+  background: #fff;
+  border-radius: 4px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 15px;
+  position: absolute;
+  top: 100%;
+  left: -500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.popover-container {
+  width: 100%;
+  
+  position: relative;
 }

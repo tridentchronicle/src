@@ -14,8 +14,6 @@ body {
     overflow: hidden; 
 }
 
-
-
 .ui.menu#side-menu a.item{
     display: block;
     color: #000;
@@ -24,7 +22,12 @@ body {
 }
 
 /* Change the link color on hover */
-    .ui.menu#side-menu a.item:hover, .ui.menu#side-menu a.active {
+    .ui.menu#side-menu a.item:hover {
+    background-color: green;
+    color: white;
+}
+
+.ui.menu#side-menu a.active {
     background-color: green;
     color: white;
 }

@@ -36,7 +36,7 @@ export default class Login2 extends React.Component {
             window.confirm("Please select login type"); 
           }else{
         
-            axios.post('http://35.229.19.138:3005/login/', {
+            axios.post('http://35.229.19.138:8080/login/', {
               email: this.state.email,
               password: this.state.password,
               category: this.state.type

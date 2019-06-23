@@ -30,7 +30,7 @@ export default class Signup extends React.Component {
 
         checkuser()
         {
-          axios.post('http://35.229.19.138:3005/profile/', {
+          axios.post('http://35.229.19.138:8080/profile/', {
             email: this.state.email,
           })
           .then((response) => {
@@ -52,7 +52,7 @@ export default class Signup extends React.Component {
         
         
         signup() {
-            axios.post('http://35.229.19.138:3005/signup/', {
+            axios.post('http://35.229.19.138:8080/signup/', {
               first_name: this.state.first_name,
               last_name: this.state.last_name,
               address: this.state.address,

@@ -6,12 +6,16 @@ import Card4 from './card4';
 import {Redirect,BrowserRouter} from 'react-router-dom';
 
 
+
 class Message extends React.Component {
     constructor(){
         super() 
           this.state = {
+            checkMount:false,
+            popupVisible: false,
             data2: [],
             data3:[],
+            data4:[],
             beta:'1',
             beta2:'1',
             mymsg:'',
@@ -21,31 +25,75 @@ class Message extends React.Component {
             unique3:[],
             counter:0,
             temp:0,
-            test1:[1,2,3],
-            test2:[4,5,0],
             message2:false,
             owner:'nil'
           }
           this.mapper=this.mapper.bind(this);
           this.getmessages=this.getmessages.bind(this);
           this.arrayUnique=this.arrayUnique.bind(this);
+          this.handleClick = this.handleClick.bind(this);
+          this.handleOutsideClick = this.handleOutsideClick.bind(this);
+          this.getemails= this.getemails.bind(this);
+      
         
       }
-   
+
+      handleClick() {
+        if(this.state.checkMount)
+        {
+        this.getemails();
+        if (!this.state.popupVisible) {
+          // attach/remove event handler
+          document.addEventListener('click', this.handleOutsideClick, false);
+        } else {
+          document.removeEventListener('click', this.handleOutsideClick, false);
+        }
+    
+        this.setState(prevState => ({
+           popupVisible: !prevState.popupVisible,
+        }));
+      }
+    }
+      
+      handleOutsideClick(e) {
+        this.handleClick();
+      }
+
+
       componentDidMount() {
-        
-        this.getmessages();
-        this.interval = setInterval(() => this.getmessages(), 10);
+        this.state.checkMount=true;
+      
+        this.interval = setInterval(() => this.getmessages(), 1000);
+      
+    }
+
+    componentWillUnmount() {
+      this.state.checkMount=false;
+    }
+
+      getemails()
+      {
+        axios.post('http://35.229.19.138:8080/emails/')
+        .then((response) => {
+    // handle success
+    if(this.state.checkMount)
+    {
+    this.setState({data4:response.data.output})
+    }
+  })
+     
       }
       
      
       getmessages()
       {
 
-        axios.post('http://35.229.19.138:3005/mymessages/', {
+        axios.post('http://35.229.19.138:8080/mymessages/', {
           email: this.props.TextBoxValue[0]
         })
         .then((response) => {
+          if(this.state.checkMount)
+        {
           this.setState({ data2 : response.data.output });  
           var obj = this.state.data2.sort((a,b) => (a.message_id > b.message_id) ? 1 : ((b.message_id > a.message_id) ? -1 : 0)); 
           this.setState({ data3 : obj }); 
@@ -119,6 +167,7 @@ class Message extends React.Component {
           this.state.unique3[h] = this.props.TextBoxValue[0];
         }
       }
+    
      
       for(var l=0;l<this.state.unique3.length;l++)
       {
@@ -126,6 +175,10 @@ class Message extends React.Component {
       {
         if(this.state.msgid[l]<this.state.msgid[o])
         {
+          this.state.temp=this.state.msgid[l];
+          this.state.msgid[l]=this.state.msgid[o];
+          this.state.msgid[o]=this.state.temp;
+
          this.state.temp=this.state.unique3[l];
           this.state.unique3[l]=this.state.unique3[o];
           this.state.unique3[o]=this.state.temp;
@@ -133,9 +186,7 @@ class Message extends React.Component {
         }
       }
     }
-
-      console.log(this.state.unique3)
-        
+  }
       })
 
       }
@@ -143,10 +194,12 @@ class Message extends React.Component {
 
       mapper(val,val2)
       {
+        if(this.state.checkMount)
+        {
         this.setState({beta: val});
         this.setState({message2: true});
         this.setState({beta2: val2});
-       
+        }
       }
 
       arrayUnique(array) {
@@ -175,11 +228,53 @@ if(this.state.message2)
 
     )
 }
-
-
         return (
+
+
           <div class="main14">
           <p className="h5 text-center mb-4">My messages</p>
+          <div className="popover-container" ref={node => { this.node = node; }}>
+        <button
+          onClick={this.handleClick}
+          class="trybutton">
+         + New
+        </button>
+        {this.state.popupVisible && (
+          <div
+            className="popover"
+          >
+         
+{
+  this.state.data4.filter((item) => item.email != this.props.TextBoxValue[0] ).map((item, index) => {
+   
+   return (
+      
+        <div class="lab">
+  
+  <div class="row">
+      <button class="tablinks" onClick={(e) => this.mapper(this.props.TextBoxValue[0],item.email)}>
+       <div class="columnx2" >
+      <img src="https://cdn-images-1.medium.com/max/1200/1*MccriYX-ciBniUzRKAUsAw.png" width="20px" height="20px"/> 
+       </div>
+      <div class="columnx">
+      &nbsp;&nbsp;&nbsp; {item.email}  
+      <br></br>
+      </div>
+      </button>
+  
+  </div>
+  
+  </div>
+       
+    );
+  })
+  
+  }
+          </div>
+         )}
+      </div>
+           
+          <br></br>
             {
 this.state.unique3.filter((item) => item != this.props.TextBoxValue[0] ).map((item, index) => {
   for(var i=0;i<this.state.data3.length;i++)
@@ -218,6 +313,7 @@ this.state.unique3.filter((item) => item != this.props.TextBoxValue[0] ).map((it
 })
 
 }
+ 
            </div>
         );
       }

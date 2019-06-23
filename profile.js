@@ -14,7 +14,7 @@ class Profile extends React.Component {
         
       }
       componentDidMount() {
-        axios.post('http://35.229.19.138:3005/profile/', {
+        axios.post('http://35.229.19.138:8080/profile/', {
             email: this.props.TextBoxValue[0]
           })
           .then((response) => {

@@ -10,6 +10,7 @@ class Message2 extends React.Component {
     constructor(){
         super() 
           this.state = {
+            checkMount:false,
             data2: [],
             data3:[],
             beta:'1',
@@ -31,30 +32,34 @@ class Message2 extends React.Component {
       }
    
       componentDidMount() {
-
-        this.setState({beta: this.props.location.state.uid});
-        this.setState({beta2: this.props.location.state.ref});
-        this.interval = setInterval(() => this.mess(), 10);
+        this.state.checkMount=true;
         
-        this.getmessages();
-        this.interval = setInterval(() => this.getmessages(), 10);
-        
+          this.interval = setInterval(() => this.getmessages(), 1000);
+          
         
   
+      }
+      componentWillUnmount() {
+        this.state.checkMount = false;
       }
       
       returntodash()
       {
+        if(this.state.checkMount)
+        {
           this.setState({redirectToDashboard:true});
+        }
       }
      
       getmessages()
       {
 
-        axios.post('http://35.229.19.138:3005/mymessages/', {
+        axios.post('http://35.229.19.138:8080/mymessages/', {
           email: this.props.location.state.ref
         })
         .then((response) => {
+          if(this.state.checkMount)
+        {
           this.setState({ data2 : response.data.output });      
           var obj = this.state.data2.sort((a,b) => (a.message_id > b.message_id) ? 1 : ((b.message_id > a.message_id) ? -1 : 0)); 
           this.setState({ data3 : obj }); 
@@ -109,9 +114,12 @@ class Message2 extends React.Component {
 
         this.state.unique3 = this.arrayUnique(this.state.unique.concat(this.state.unique2));
 
-        
-        
+        this.setState({beta: this.props.location.state.uid});
+        this.setState({beta2: this.props.location.state.ref});
+        }
       })
+
+     
 
       }
 
@@ -136,7 +144,7 @@ class Message2 extends React.Component {
 
         return(
           <div class="lay2">
-          default
+         .
           </div>
         );
         }
@@ -179,14 +187,16 @@ class Message2 extends React.Component {
       }
      
       handleChange = (e) => {
+        if(this.state.checkMount)
+        {
         this.setState({
             mymsg: e.target.value,
         })
+      }
     }
 
 
-      
-    async send(from,to,cont,dated)
+    send(from,to,cont,dated)
       {
         if(this.state.beta==1)
         {
@@ -195,14 +205,14 @@ alert("click on view messages first");
         else{
 
         
-        axios.post('http://35.229.19.138:3005/sendmessages/', {
+        axios.post('http://35.229.19.138:8080/sendmessages/', {
           user_id_from: from,
           user_id_to:to,
           content: cont,
           date_created:dated
         })
         .then((response) => {
-         console.log(response)
+         
       })
     }
       }
